@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  prescription_id: 
+  patient_id: 
+  missed_date: 2013-02-16 03:55:05
+  video_url: MyString
+
+two:
+  prescription_id: 
+  patient_id: 
+  missed_date: 2013-02-16 03:55:05
+  video_url: MyString

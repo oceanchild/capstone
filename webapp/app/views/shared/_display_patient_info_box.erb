@@ -1,0 +1,34 @@
+<div class="well clearfix" id="patient-info" style="display: none;">
+  <div class="span7" id="patient-data">
+    <h4>Patient Information:</h4>
+    <div class="span12 no-margin">
+      <dl class="span9" id="patient-status">
+        <dd class="clearfix"><span class="label label-info">Latest Heart Rate:</span><span class="label pull-right patient-status-row">loading...</span></dd>
+        <dd class="clearfix"><span class="label label-info">Latest Blood Pressure:</span><span class="label pull-right patient-status-row">loading...</span></dd>
+        <dd class="clearfix"><span class="label label-info">Heath Status:</span><span class="label pull-right patient-status-row">loading...</span></dd>
+        <dd class="clearfix"><span class="label label-info">Fall Status:</span><span class="label pull-right patient-status-row">loading...</span></dd>
+        <dd class="clearfix"><span class="label label-info">Last Missed Medication:</span><span class="label pull-right patient-status-row">loading...</span></dd>
+      </dl>
+      <div class="span3">
+        <img class="img-rounded" id="patient-profile-avatar" alt="" />
+      </div>
+    </div>
+    <span class="visible-phone"><br /></span>
+    <dl class="span12 no-margin" id="patient-profile">
+      <dd><span class="label label-inverse">Name:</span><span class="label pull-right patient-profile-name">loading...</span></dd>
+      <dd><span class="label label-inverse">Gender:</span><span class="label pull-right patient-profile-gender">loading...</span></dd>
+      <dd><span class="label label-inverse">Age:</span><span class="label pull-right patient-profile-age">loading...</span></dd>
+      <dd><span class="label label-inverse">Phone #:</span><span class="label pull-right patient-profile-phone">loading...</span></dd>
+      <dd><span class="label label-inverse">Address:</span><span class="label label-limit-width pull-right patient-profile-address" id="gmap_address">loading...</span></dd>
+      <dd><span class="label label-inverse">Symptoms:</span><span class="label label-limit-width pull-right patient-profile-symptoms" readonly>loading...</span></dd>
+    </dl>
+  </div>
+  <div class="span5" id="patient-gmap">
+    <div class="hidden-phone" id="map_canvas"></div>
+  </div>
+</div>
+<div class="well clearfix" id="patient-info-empty" style="display: none;">
+  <div class="clearfix">
+    <img class="img-rounded" src="/assets/patient-info-empty.jpg" alt="" />
+  </div>
+</div>

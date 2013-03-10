@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  patient_id: 
+  author_id: 
+  content: MyText
+  date_created: 2013-02-16 03:46:49
+  reply_to_note: 
+
+two:
+  patient_id: 
+  author_id: 
+  content: MyText
+  date_created: 2013-02-16 03:46:49
+  reply_to_note: 

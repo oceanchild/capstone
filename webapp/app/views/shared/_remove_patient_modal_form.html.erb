@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h3 id="removePatients">Remove Patients</h3>
+</div>
+<%= form_tag '/patients/remove', :method => 'delete', :class => 'no-tail', :id => 'remove-patient-form' do %>
+  <div class="modal-body">
+    <span class="span12">
+      <%= label_tag :patient_ids, 'Select multiple patients:', :class => 'form-label span4' %>
+      <%= select_tag :patient_ids, '', :multiple => true, :id => 'remove-patient-select' %>
+    </span>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <%= button_tag 'Remove', :type => 'submit', :class => 'btn btn-primary' %>
+  </div>
+<% end %>

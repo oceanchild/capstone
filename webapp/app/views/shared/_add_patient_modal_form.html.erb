@@ -1,0 +1,89 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h3 id="addPatient">New Patient</h3>
+</div>
+<%= form_tag '/patients', :method => 'post', :class => 'no-tail', :id => 'add-patient-form' do %>
+<% if controller.controller_name=='patients' %>
+  <div class="error_messages">
+    <% if @patient.errors.any? %>
+    <ul>
+      <% for message in @patient.errors.full_messages %>
+        <li class="text-error"><%= message %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+<% else %>
+  <div class="error_messages"></div>
+<% end %>
+  <div class="modal-body">
+    <div class="span9" id="add-patient-form-fields">
+      <span class="span12">
+        <%= label_tag :patient_first_name, 'First Name:', :class => 'form-label span4' %>
+        <%= text_field_tag 'patient[first_name]', '', :class => 'input-block-level span8', :required => true %>
+      </span>
+      <span class="span12">
+        <%= label_tag :patient_last_name, 'Last Name:', :class => 'form-label span4' %>
+        <%= text_field_tag 'patient[last_name]', '', :class => 'span8', :required => true %>
+      </span>
+      <span class="span12">
+        <label class="form-label span4">Gender:</label>
+        <label class="radio inline span4">
+          <%= radio_button_tag 'patient[gender]', 'Male', :checked => true %>
+          Male
+        </label>
+        <label class="radio inline span4">
+          <%= radio_button_tag 'patient[gender]', 'Female' %>
+          Female
+        </label>
+      </span>
+      <span class="span12">
+        <%= label_tag :patient_age, 'Age:', :class => 'form-label span4' %>
+        <%= number_field_tag 'patient[age]', nil, :in => 1..100, :class => 'span8', :required => true %>
+      </span>
+      <span class="span12">
+        <%= label_tag :patient_phone, 'Phone:', :class => 'form-label span4' %>
+        <%= text_field_tag 'patient[phone]', '', :placeholder => '(xxx) xxx-xxxx', :class => 'span8', :required => true %>
+      </span>
+      <span class="span12">
+        <%= label_tag :patient_address, 'Address:', :class => 'form-label span4' %>
+        <%= text_field_tag 'patient[address]', '', :placeholder => '123 aname st, city, province', :class => 'span8', :required => true %>
+      </span>
+      <span class="span12">
+        <%= label_tag :patient_health_status, 'Health Status:', :class => 'form-label span4' %>
+        <%= select_tag 'patient[health_status]', '<option value="Healthy">Healthy</option><option value="Sub-healthy">Sub-healthy</option><option value="Ill">Ill</option><option value="Passed away">Passed away</option>'.html_safe, :class => 'span8' %>
+      </span>
+      <span class="span12">
+        <%= label_tag :patient_symptoms, 'Symptoms:', :class => 'form-label span4' %>
+        <%= text_area_tag 'patient[symptoms]', nil, :rows => 3, :class => 'no-tail span8', :required => true %>
+      </span>
+    </div>
+    <div class="span3" id="add-patient-avatar-selection" style="overflow-x: hidden; overflow-y: auto;">
+        <%= hidden_field_tag 'patient[avatar]', '/assets/avatars/dp_default.jpg' %>
+        <img class="img-rounded img-select" src="/assets/avatars/dp0.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp1.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp2.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp3.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp4.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp5.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp6.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp7.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp8.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp9.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp10.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp11.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp12.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp13.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp14.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp15.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp16.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp17.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp18.jpg" />
+        <img class="img-rounded img-select" src="/assets/avatars/dp19.jpg" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <%= button_tag 'Add', :type => 'submit', :class => 'btn btn-primary' %>
+  </div>
+<% end %>

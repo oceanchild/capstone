@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  serial: MyString
+  hash_code: MyString
+  petient_id: 
+  date_registered: 2013-02-16 03:44:25
+
+two:
+  serial: MyString
+  hash_code: MyString
+  petient_id: 
+  date_registered: 2013-02-16 03:44:25
