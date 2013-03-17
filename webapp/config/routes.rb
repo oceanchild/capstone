@@ -19,6 +19,8 @@ Webapp::Application.routes.draw do
 
   resources :patients
 
+  resources :prescriptions
+
   resources :sessions, :path => 'login'
 
   # The priority is based upon order of creation:
