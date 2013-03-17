@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:user_type] = nil
     redirect_to root_url
   end
 end
