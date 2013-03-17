@@ -10,7 +10,7 @@ development:
   database: capstone
   pool: 5
   username: root
-  password: honker198874
+  password: kkvvkk8782
   socket: /private/var/mysql/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
