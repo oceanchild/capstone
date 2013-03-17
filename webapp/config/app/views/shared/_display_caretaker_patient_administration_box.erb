@@ -1,0 +1,223 @@
+<div class="tabbable" id="patient-administration" style="display: none;"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs bordered" id="action-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Notes</a></li>
+    <li><a href="#tab2" data-toggle="tab">Prescription</a></li>
+    <li>
+      <a href="#tab3" data-toggle="tab">
+        <i class="hidden-phone">Primary Contact</i>
+        <i class="visible-phone">Contact</i>
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content well bordered">
+    <div class="tab-pane fade in active" id="tab1">
+      <!-- Button to trigger add note modal -->
+      <button class="btn btn-primary force-tail" id="add-note-btn">Add New Note</button>
+      <!-- Add note modal -->
+      <div id="add-note-form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addNote" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">New Note</h3>
+        </div>
+        <div class="modal-body">
+          <textarea rows="6" class="span9"></textarea><span class="span3 pull-right"><img class="img-rounded" src="/assets/avatars/dp8.jpg" alt="" /></span>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+          <button class="btn btn-primary">Submit</button>
+        </div>
+      </div><!--/modal -->
+      <ul class="nav nav-tabs nav-stacked no-tail slider-tab">
+        <li class="active">
+          <a class="clearfix">
+            <span class="pull-left">[level_1_note_1_topic]</span>
+            <br />
+            <div class="conversation">
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="clearfix">
+            <span class="pull-left">[level_1_note_1_topic]</span>
+            <br />
+            <div class="conversation">
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="clearfix">
+            <span class="pull-left">[level_1_note_1_topic]</span>
+            <br />
+            <div class="conversation">
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                <div class="span11">
+                  <span class="pull-right">[note_date]</span>
+                  <b>[note_author]:&nbsp;</b>
+                  [note_content]
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-pane fade in" id="tab2">
+      <ul class="nav nav-tabs nav-stacked no-tail slider-tab">
+        <li class="active">
+          <a class="clearfix">
+            <span class="pull-left">[prescription_name]</span>
+            <span class="pull-right">[from_to_date]</span>
+            <br>
+            <div class="conversation">
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/pill1.jpg" alt=""></div>
+                <div class="span11">
+                  <dt>[pill_name]</dt>
+                  <dd>[pill_description]</dd>
+                </div>
+              </div>
+              <div class="well well-small no-tail clearfix">
+                <div class="span1"><img class="img-rounded" src="/assets/pill2.jpg" alt=""></div>
+                <div class="span11">
+                  <dt>[pill_name]</dt>
+                  <dd>[pill_description]</dd>
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="clearfix" href="#">
+            <span class="pull-left">[prescription_name]</span>
+            <span class="pull-right">[from_to_date]</span>
+          </a>
+        </li>
+        <li>
+          <a class="clearfix" href="#">
+            <span class="pull-left">[prescription_name]</span>
+            <span class="pull-right">[from_to_date]</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-pane fade in" id="tab3">
+      <div class="well well-small no-tail bg-eee clearfix">
+        <div class="span3">
+          <img class="img-rounded" src="/assets/avatars/dp10.jpg" alt="" />
+        </div>
+        <div class="span9">
+          <span class="span12">
+            <label class="form-label span2">First Name:</label>
+            <input class="" type="text" readonly value="" />
+          </span>
+          <span class="span12">
+            <label class="form-label span2">Last Name:</label>
+            <input class="" type="text" readonly value="" />
+          </span>
+          <span class="span12">
+            <label class="form-label span2">Gender:</label>
+            <span class="force-tail">
+              <label class="radio inline span2">
+                <input type="radio" name="gender" disabled="disabled"  />
+                Male
+              </label>
+              <label class="radio inline span2">
+                <input type="radio" name="gender" disabled="disabled" checked="checked"/>
+                Female
+              </label>
+            </span>
+          </span>
+          <span class="span12">
+            <label class="form-label span2">Phone:</label>
+            <input class="" type="text" readonly value="" />
+          </span>
+          <span class="span12">
+            <label class="form-label span2">Address:</label>
+            <input class="" type="text" readonly value="" />
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

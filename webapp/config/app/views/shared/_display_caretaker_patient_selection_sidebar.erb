@@ -1,0 +1,19 @@
+<ul class="nav nav-list" id="patient-selection">
+  <li class="nav-header">Patient Administration</li>
+  <li class="divider"></li>
+  <!-- Button to trigger add patient modal -->
+  <!--<li><a href="#add-patient-modal" id="add-patient-btn" class="btn">Add a new patient</a></li>-->
+  <!-- Add patient modal -->
+  <!--<div id="add-patient-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addPatient" aria-hidden="true">-->
+    <!--<%= render 'shared/add_patient_modal_form' %>-->
+  <!--</div>&lt;!&ndash;/modal &ndash;&gt;-->
+  <% @patient.each do |_patient| %>
+  <li class="patient-list"><a><%= _patient.first_name %>&nbsp;<%= _patient.last_name %></a></li>
+  <% end %>
+  <!-- Button to trigger remove patient modal -->
+  <!--<li><a href="#remove-patient" id="remove-patient-btn" class="btn">Remove patients</a></li>-->
+  <!--&lt;!&ndash; Remove patient modal &ndash;&gt;-->
+  <!--<div id="remove-patient-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="removePatient" aria-hidden="true">-->
+    <!--<%= render 'shared/remove_patient_modal_form' %>-->
+  <!--</div>&lt;!&ndash;/modal &ndash;&gt;-->
+</ul>

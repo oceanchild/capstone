@@ -248,12 +248,24 @@
       </ul>
     </div>
     <div class="well sidebar-nav" id="user-patient-selection">
-      <%= render 'shared/display_patient_selection_sidebar' %>
+      <% if session[:user_type].to_s == "Doctor" %>
+        <%= render 'shared/display_doctor_patient_selection_sidebar' %>
+      <% elsif session[:user_type].to_s == "Guardian" %>
+        <%= render 'shared/display_guardian_patient_selection_sidebar' %>
+      <% else %>
+          <%= render 'shared/display_caretaker_patient_selection_sidebar' %>
+      <% end %>
     </div><!--/.well -->
   </div><!--/span-->
   <div class="span9">
     <%= render 'shared/display_patient_info_box' %>
-    <%= render 'shared/display_patient_administration_box' %>
+    <% if session[:user_type].to_s == "Doctor" %>
+      <%= render 'shared/display_doctor_patient_administration_box' %>
+    <% elsif session[:user_type].to_s == "Guardian" %>
+      <%= render 'shared/display_guardian_patient_administration_box' %>
+    <% else %>
+      <%= render 'shared/display_caretaker_patient_administration_box' %>
+    <% end %>
   </div><!--/span-->
 </div><!--/row-->
 

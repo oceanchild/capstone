@@ -144,101 +144,41 @@
     </div>
     <div class="tab-pane fade in" id="tab2">
       <div class="well well-small no-tail bg-eee clearfix">
-        <form class="pull-left no-tail">
+        <%= form_tag '/prescriptions', :method => 'post', :id => 'add-prescription-form' do %>
           <span class="span12">
-            <label class="form-label span2">Select Pill:</label>
-            <div class="btn-group">
-              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                List of pills
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a tabindex="-1" href="#">Pill 1</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">Pill 2</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">Pill 3</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">Pill 4</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">Pill 5</a>
-                </li>
-              </ul>
-            </div>
+            <label class="form-label span2">Select Pill:</label>   
+            <%= select_tag "prescription[pill_id]", options_from_collection_for_select(@allPills, "id", "name") %>
+          </span>
+          <span class="span12">
+             <label class="form-label span2">Direction:</label>
+             <%= text_area_tag 'prescription[direction]', nil, :rows => 3, :class => 'no-tail span8', :required => true %>
           </span>
           <span class="span12">
             <label class="form-label span2">Start Date:</label>
             <div class="input-append date" id="prescription-date-start">
-              <input class="special-place span2" size="16" type="text" value="00-00-0000" readonly>
+              <input class="special-place span2" id="prescription_start_date" name="prescription[start_date]" size="16" type="text" value="00-00-0000" readonly>
               <span class="add-on"><i class="icon-calendar"></i></span>
             </div>
           </span>
           <span class="span12">
             <label class="form-label span2">End Date:</label>
             <div class="input-append date" id="prescription-date-end">
-              <input class="special-place span2" size="16" type="text" value="00-00-0000" readonly>
+              <input class="special-place span2" id="prescription_end_date" name="prescription[end_date]" size="16" type="text" value="00-00-0000" readonly>
               <span class="add-on"><i class="icon-calendar"></i></span>
             </div>
           </span>
           <span class="span12">
-            <label class="form-label span2">Quantity:</label>
-            <div class="btn-group">
-              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                Quantities each time
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a tabindex="-1" href="#">1</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">2</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">3</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">4</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">5</a>
-                </li>
-              </ul>
-            </div>
+            <label class="form-label span2">Quantity:</label> 
+            <%= select_tag 'prescription[quantity_each_serving]', '<option value=1>1 pill per serving</option><option value=2>2 pills per serving</option><option value=3>3 pills per serving</option><option value=4>4 pills per serving</option>'.html_safe %>
           </span>
           <span class="span12">
             <label class="form-label span2">Frenquency:</label>
-            <div class="btn-group">
-              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                Frenquency per day
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a tabindex="-1" href="#">once</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">2 times</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">3 times</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">4 times</a>
-                </li>
-                <li>
-                  <a tabindex="-1" href="#">5 times</a>
-                </li>
-              </ul>
-            </div>
+            <%= select_tag 'prescription[frequency_per_day]', '<option value=1>1 time per day</option><option value=2>2 times per day</option><option value=3>3 times per day</option>'.html_safe %>            
           </span>
+          <%= hidden_field_tag 'prescription[patient_id]', 170 %>
+          <%= hidden_field_tag 'prescription[doctor_id]', session[:user_id] %>
           <button class="btn btn-primary form-btn force-tail" type="submit">Submit</button>
-        </form>
+        <% end %>
       </div>
       <ul class="nav nav-tabs nav-stacked no-tail slider-tab">
         <li class="active">

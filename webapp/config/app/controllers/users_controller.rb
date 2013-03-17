@@ -16,8 +16,6 @@ class UsersController < ApplicationController
     @pillInstance = []
     _myPatient.each do |_myPatient|
       @note[_myPatient.patient_id] = Note.find_by_sql(["select * from notes where patient_id = ? order by date_created", _myPatient.patient_id])
-      @pillInstance[_myPatient.patient_id] = MissedInstance.find_by_sql(["select i.prescription_id, i.missed_date from missed_instances as i, prescriptions as p where i.missed_date IS NOT NULL and i.prescription_id=p.id and p.patient_id=? order by i.missed_date", _myPatient.patient_id]).collect{|x| x.missed_date}
-      # @numPatient = @numPatient +1
     end
 
     #the following code is not efficient, but it works well
@@ -31,6 +29,10 @@ class UsersController < ApplicationController
     _myPatient.each do |_myPatient|
       @primaryContact[_myPatient.patient_id] = User.find_by_sql(["select c.first_name, c.last_name, c.phone, c.address from users as c, associations as j where c.id=j.user_id and j.patient_id=? and c.usertype='Guardian'", _myPatient.patient_id])
     end
+
+    @prescription = Prescription.find_by_sql(["select p.direction, p.frequency_per_day, p.quantity_each_serving, p.start_date, p.end_date, s.name, u.first_name, u.last_name from prescriptions as p, pills as s, users as u where p.pill_id = s.id and p.doctor_id = u.id"])
+  
+    @allPills = Pill.find_by_sql(["select id, name from pills"])
   end
 
   def new
