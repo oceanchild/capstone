@@ -28,13 +28,12 @@
         overflow: hidden;
       }
     }
-    .affix {
+    /*.affix {
       position: fixed;
       top: 62px;
-      /*width: 283px;*/
       left: auto;
       right: auto;
-    }
+    }*/
   </style>
   <style type="text/css">
     body {
@@ -68,6 +67,9 @@
     .modal {
       max-height: 90%;
       overflow-y: auto;
+    }
+    .datepicker {
+      z-index: 1100; /* to overcome the modal */
     }
 
     .conversation {
@@ -204,45 +206,7 @@
         <li><a href="#edit-profile" id="edit-profile-btn" class="btn">Edit profile</a></li>
         <!-- Edit profile modal -->
         <div id="edit-profile-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="editProfile" aria-hidden="true">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Edit Profile</h3>
-          </div>
-          <div class="modal-body">
-            <span class="span12">
-              <label class="form-label span2">First Name:</label>
-              <input class="" type="text" readonly value="" />
-            </span>
-            <span class="span12">
-              <label class="form-label span2">Last Name:</label>
-              <input class="" type="text" readonly value="" />
-            </span>
-            <span class="span12">
-              <label class="form-label span2">Gender:</label>
-              <span class="force-tail">
-                <label class="radio inline span2">
-                  <input type="radio" name="gender" disabled="disabled"  />
-                  Male
-                </label>
-                <label class="radio inline span2">
-                  <input type="radio" name="gender" disabled="disabled" checked="checked"/>
-                  Female
-                </label>
-              </span>
-            </span>
-            <span class="span12">
-              <label class="form-label span2">Phone:</label>
-              <input class="" type="text" readonly value="" />
-            </span>
-            <span class="span12">
-              <label class="form-label span2">Address:</label>
-              <input class="" type="text" readonly value="" />
-            </span>
-          </div>
-          <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary">Save changes</button>
-          </div>
+          <%= render 'shared/edit_profile_modal_form' %>
         </div><!--/modal -->
         <li><a href="<%= logout_path %>" id="logout-btn" class="btn btn-warning">Logout</a></li>
       </ul>
@@ -374,23 +338,26 @@
       $('#remove-patient-modal').modal('show');
     });
     $('#add-note-btn').click(function() {
-      $('#add-note-form').modal('show');
+      $('#add-note-modal').modal('show');
+    });
+    $('#add-prescription-btn').click(function() {
+      $('#add-prescription-modal').modal('show');
     });
   });
 
   /*
    Bootstrap Affix Customization
    */
-  $(document).ready(function() {
-    setTimeout(function() {
-      $('#user-patient-selection').affix({
-        offset: {
-          top: function () { return $(window).width() <= 980 ? 290 : 510 },
-          bottom: 270
-        }
-      });
-    }, 100);
-  });
+  // $(document).ready(function() {
+  //   setTimeout(function() {
+  //     $('#user-patient-selection').affix({
+  //       offset: {
+  //         top: function () { return $(window).width() <= 980 ? 290 : 510 },
+  //         bottom: 270
+  //       }
+  //     });
+  //   }, 100);
+  // });
 </script>
 
 <script type="text/javascript">

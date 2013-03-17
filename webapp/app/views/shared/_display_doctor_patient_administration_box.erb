@@ -12,12 +12,12 @@
   <div class="tab-content well bordered">
     <div class="tab-pane fade in active" id="tab1">
       <!-- Button to trigger add note modal -->
-      <button class="btn btn-primary force-tail" id="add-note-btn">Add New Note</button>
+      <a href="#add-note" id="add-note-btn" class="btn btn-primary force-tail">Add New Note</a>
       <!-- Add note modal -->
-      <div id="add-note-form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addNote" aria-hidden="true">
+      <div id="add-note-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addNote" aria-hidden="true">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 id="myModalLabel">New Note</h3>
+          <h3 id="addNote">New Note</h3>
         </div>
         <div class="modal-body">
           <textarea rows="6" class="span9"></textarea><span class="span3 pull-right"><img class="img-rounded" src="/assets/avatars/dp8.jpg" alt="" /></span>
@@ -143,43 +143,12 @@
       </ul>
     </div>
     <div class="tab-pane fade in" id="tab2">
-      <div class="well well-small no-tail bg-eee clearfix">
-        <%= form_tag '/prescriptions', :method => 'post', :id => 'add-prescription-form' do %>
-          <span class="span12">
-            <label class="form-label span2">Select Pill:</label>   
-            <%= select_tag "prescription[pill_id]", options_from_collection_for_select(@allPills, "id", "name") %>
-          </span>
-          <span class="span12">
-             <label class="form-label span2">Direction:</label>
-             <%= text_area_tag 'prescription[direction]', nil, :rows => 3, :required => true %>
-          </span>
-          <span class="span12">
-            <label class="form-label span2">Start Date:</label>
-            <div class="input-append date" id="prescription-date-start">
-              <input class="special-place span2" id="prescription_start_date" name="prescription[start_date]" size="16" type="text" value="00-00-0000" readonly>
-              <span class="add-on"><i class="icon-calendar"></i></span>
-            </div>
-          </span>
-          <span class="span12">
-            <label class="form-label span2">End Date:</label>
-            <div class="input-append date" id="prescription-date-end">
-              <input class="special-place span2" id="prescription_end_date" name="prescription[end_date]" size="16" type="text" value="00-00-0000" readonly>
-              <span class="add-on"><i class="icon-calendar"></i></span>
-            </div>
-          </span>
-          <span class="span12">
-            <label class="form-label span2">Quantity:</label> 
-            <%= select_tag 'prescription[quantities_per_serving]', '<option value=1>1 pill per serving</option><option value=2>2 pills per serving</option><option value=3>3 pills per serving</option><option value=4>4 pills per serving</option>'.html_safe %>
-          </span>
-          <span class="span12">
-            <label class="form-label span2">Frenquency:</label>
-            <%= select_tag 'prescription[servings_per_day]', '<option value=1>1 time per day</option><option value=2>2 times per day</option><option value=3>3 times per day</option>'.html_safe %>            
-          </span>
-          <%= hidden_field_tag 'prescription[patient_id]', 170 %>
-          <%= hidden_field_tag 'prescription[doctor_id]', session[:user_id] %>
-          <button class="btn btn-primary form-btn force-tail" type="submit">Submit</button>
-        <% end %>
-      </div>
+      <!-- Button to trigger add prescription modal -->
+      <a href="#add-prescription" id="add-prescription-btn" class="btn btn-primary force-tail">Add Prescription Note</a>
+      <!-- Add prescription modal -->
+      <div id="add-prescription-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addPrescription" aria-hidden="true">
+        <%= render 'shared/add_prescription_modal_form' %>
+      </div><!--/modal -->
       <ul class="nav nav-tabs nav-stacked no-tail slider-tab">
         <li class="active">
           <a class="clearfix">
