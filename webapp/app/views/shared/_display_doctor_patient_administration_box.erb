@@ -169,11 +169,11 @@
           </span>
           <span class="span12">
             <label class="form-label span2">Quantity:</label> 
-            <%= select_tag 'prescription[quantity_each_serving]', '<option value=1>1 pill per serving</option><option value=2>2 pills per serving</option><option value=3>3 pills per serving</option><option value=4>4 pills per serving</option>'.html_safe %>
+            <%= select_tag 'prescription[quantities_per_serving]', '<option value=1>1 pill per serving</option><option value=2>2 pills per serving</option><option value=3>3 pills per serving</option><option value=4>4 pills per serving</option>'.html_safe %>
           </span>
           <span class="span12">
             <label class="form-label span2">Frenquency:</label>
-            <%= select_tag 'prescription[frequency_per_day]', '<option value=1>1 time per day</option><option value=2>2 times per day</option><option value=3>3 times per day</option>'.html_safe %>            
+            <%= select_tag 'prescription[serving_per_day]', '<option value=1>1 time per day</option><option value=2>2 times per day</option><option value=3>3 times per day</option>'.html_safe %>            
           </span>
           <%= hidden_field_tag 'prescription[patient_id]', 170 %>
           <%= hidden_field_tag 'prescription[doctor_id]', session[:user_id] %>

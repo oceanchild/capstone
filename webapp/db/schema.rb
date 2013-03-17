@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(:version => 0) do
     t.integer "doctor_id",             :null => false
     t.integer "pill_id",               :null => false
     t.text    "direction",             :null => false
-    t.integer "frequency_per_day",     :null => false
-    t.integer "quantity_each_serving", :null => false
+    t.integer "servings_per_day",     :null => false
+    t.integer "quantities_per_serving", :null => false
     t.date    "start_date",            :null => false
     t.date    "end_date",              :null => false
   end

@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       @primaryContact[_myPatient.patient_id] = User.find_by_sql(["select c.first_name, c.last_name, c.phone, c.address from users as c, associations as j where c.id=j.user_id and j.patient_id=? and c.usertype='Guardian'", _myPatient.patient_id])
     end
 
-    @prescription = Prescription.find_by_sql(["select p.direction, p.frequency_per_day, p.quantity_each_serving, p.start_date, p.end_date, s.name, u.first_name, u.last_name from prescriptions as p, pills as s, users as u where p.pill_id = s.id and p.doctor_id = u.id"])
+    @prescription = Prescription.find_by_sql(["select p.direction, p.servings_per_day, p.quantities_per_serving, p.start_date, p.end_date, s.name, u.first_name, u.last_name from prescriptions as p, pills as s, users as u where p.pill_id = s.id and p.doctor_id = u.id"])
   
     @allPills = Pill.find_by_sql(["select id, name from pills"])
   end

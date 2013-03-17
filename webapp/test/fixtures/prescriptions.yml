@@ -5,8 +5,8 @@ one:
   doctor_id: 
   pill_id: 
   direction: MyText
-  frequency_per_day: 
-  quantity_each_serving: 
+  servings_per_day: 
+  quantities_per_serving: 
   start_date: 2013-02-16 03:49:19
   end_date: 2013-02-16 03:49:19
 
@@ -15,7 +15,7 @@ two:
   doctor_id: 
   pill_id: 
   direction: MyText
-  frequency_per_day: 
-  quantity_each_serving: 
+  servings_per_day: 
+  quantities_per_serving: 
   start_date: 2013-02-16 03:49:19
   end_date: 2013-02-16 03:49:19
