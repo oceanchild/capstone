@@ -4,6 +4,13 @@ class PrescriptionsController < ApplicationController
   end
 
   def create
+    _date_list = params[:prescription][:start_date].split('-')
+    params[:prescription][:start_date] = DateTime.new(_date_list[2].to_i, _date_list[0].to_i, _date_list[1].to_i)
+    _date_list = params[:prescription][:end_date].split('-')
+    params[:prescription][:end_date] = DateTime.new(_date_list[2].to_i, _date_list[0].to_i, _date_list[1].to_i)
+    # return render :inline => _date_list.inspect
+    # params[:prescription][:start_date] = params[:prescription][:start_date].to_date
+    # return render :inline => params[:prescription][:start_date].inspect
   	@prescription = Prescription.new(params[:prescription])
   	@prescription.save
   	redirect_to :controller => 'users', :action => 'index'
