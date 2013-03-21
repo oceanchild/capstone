@@ -1,0 +1,40 @@
+<html>
+<head>
+  <title>test</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript">
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = today.getMonth() + 1;// < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1;
+    var dd = today.getDate();
+    var hh = today.getHours();
+    var mm = today.getMinutes();
+    var ss = today.getSeconds();
+    today_str = yyyy + '-' + mm + '-' + dd + ' ' + hh + ':' + mm + ':' + ss;
+    var patient_data = {
+      'heart_rate': 80,
+      'blood_pressure_h': 220,
+      'blood_pressure_l': 100,
+      'last_emergency': today_str,
+    };
+    $(document).ready(function() {
+      $('#submit').click(function(e) {
+        $.ajax({
+          type: 'POST',
+          contentType: 'application/json',
+          url: 'http://localhost:8080/push',
+          data: JSON.stringify(patient_data),
+          dataType: 'json'
+        }).done(function(data) {
+          $('#response').append(JSON.stringify(data) + '<br />');
+        });
+        e.preventDefault();
+      });
+    });
+  </script>
+</head>
+<body>
+  <a href="#" id="submit">send sample json to webservice push() method</a>
+  <div id="response"></div>
+</body>
+</html>

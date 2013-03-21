@@ -2,38 +2,55 @@
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
   <h3 id="editProfile">Edit Profile</h3>
 </div>
-<div class="modal-body">
-  <span class="span12">
-    <label class="form-label span3">First Name:</label>
-    <input class="" type="text" readonly value="" />
-  </span>
-  <span class="span12">
-    <label class="form-label span3">Last Name:</label>
-    <input class="" type="text" readonly value="" />
-  </span>
-  <span class="span12">
-    <label class="form-label span3">Gender:</label>
-    <span class="force-tail">
-      <label class="radio inline span3">
-        <input type="radio" name="gender" disabled="disabled"  />
-        Male
-      </label>
-      <label class="radio inline span3">
-        <input type="radio" name="gender" disabled="disabled" checked="checked"/>
-        Female
-      </label>
+<%= form_tag '/users/update', :method => 'post', :class => 'no-tail', :id => 'edit-profile-form' do %>
+<!--
+<% if controller.controller_name=='users' %>
+  <div class="error_messages">
+    <% if @patient.errors.any? %>
+    <ul>
+      <% for message in @patient.errors.full_messages %>
+        <li class="text-error"><%= message %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+<% else %>
+  <div class="error_messages"></div>
+<% end %>
+-->
+  <div class="modal-body">
+    <span class="span12">
+      <label class="form-label span3">First Name:</label>
+      <input class="" type="text" readonly value="" />
     </span>
-  </span>
-  <span class="span12">
-    <label class="form-label span3">Phone:</label>
-    <input class="" type="text" readonly value="" />
-  </span>
-  <span class="span12">
-    <label class="form-label span3">Address:</label>
-    <input class="" type="text" readonly value="" />
-  </span>
-</div>
-<div class="modal-footer">
-  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-  <button class="btn btn-primary">Save changes</button>
-</div>
+    <span class="span12">
+      <label class="form-label span3">Last Name:</label>
+      <input class="" type="text" readonly value="" />
+    </span>
+    <span class="span12">
+      <label class="form-label span3">Gender:</label>
+      <span class="force-tail">
+        <label class="radio inline span3">
+          <input type="radio" name="gender" disabled="disabled"  />
+          Male
+        </label>
+        <label class="radio inline span3">
+          <input type="radio" name="gender" disabled="disabled" checked="checked"/>
+          Female
+        </label>
+      </span>
+    </span>
+    <span class="span12">
+      <label class="form-label span3">Phone:</label>
+      <input class="" type="text" readonly value="" />
+    </span>
+    <span class="span12">
+      <label class="form-label span3">Address:</label>
+      <input class="" type="text" readonly value="" />
+    </span>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+<% end %>
