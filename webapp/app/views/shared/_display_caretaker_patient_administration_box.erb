@@ -150,20 +150,17 @@
             <span class="pull-right">[from_to_date]</span>
             <br>
             <div class="conversation">
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/pill1.jpg" alt=""></div>
-                <div class="span11">
-                  <dt>[pill_name]</dt>
-                  <dd>[pill_description]</dd>
+              <% @prescription.each do |_p|%>
+                <div class="well well-small no-tail clearfix">
+                  <div class="span1"><img class="img-rounded" src="/assets/pill1.jpg" alt=""></div>
+                  <div class="span11">
+                    <dt><%= _p.name%>: Doctor <%= _p.first_name %> <%= _p.last_name %></dt>
+                    <dd>Start from <b><%= _p.start_date %></b> to <b><%= _p.end_date %></b></dd>
+                    <dd><%= _p.direction%></dd>
+                    <dd>Instruction: <%= _p.servings_per_day %> time(s) per day, <%= _p.quantities_per_serving %> pill(s) per serving </dd>
+                  </div>
                 </div>
-              </div>
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/pill2.jpg" alt=""></div>
-                <div class="span11">
-                  <dt>[pill_name]</dt>
-                  <dd>[pill_description]</dd>
-                </div>
-              </div>
+              <% end %>
             </div>
           </a>
         </li>

@@ -152,37 +152,20 @@
       <ul class="nav nav-tabs nav-stacked no-tail slider-tab">
         <li class="active">
           <a class="clearfix">
-            <span class="pull-left">[prescription_name]</span>
-            <span class="pull-right">[from_to_date]</span>
+            <span class="pull-left"><b>Current Prescription</b></span>
+            <span class="pull-right"></span>
             <br>
-            <div class="conversation">
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/pill1.jpg" alt=""></div>
-                <div class="span11">
-                  <dt>[pill_name]</dt>
-                  <dd>[pill_description]</dd>
+            <% @prescription.each do |_p|%>
+                <div class="well well-small no-tail clearfix">
+                  <div class="span1"><img class="img-rounded" src="/assets/pill1.jpg" alt=""></div>
+                  <div class="span11">
+                    <dt><%= _p.name%>: Doctor <%= _p.first_name %> <%= _p.last_name %></dt>
+                    <dd>Start from <b><%= _p.start_date %></b> to <b><%= _p.end_date %></b></dd>
+                    <dd><%= _p.direction%></dd>
+                    <dd>Instruction: <%= _p.servings_per_day %> time(s) per day, <%= _p.quantities_per_serving %> pill(s) per serving </dd>
+                  </div>
                 </div>
-              </div>
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/pill2.jpg" alt=""></div>
-                <div class="span11">
-                  <dt>[pill_name]</dt>
-                  <dd>[pill_description]</dd>
-                </div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a class="clearfix" href="#">
-            <span class="pull-left">[prescription_name]</span>
-            <span class="pull-right">[from_to_date]</span>
-          </a>
-        </li>
-        <li>
-          <a class="clearfix" href="#">
-            <span class="pull-left">[prescription_name]</span>
-            <span class="pull-right">[from_to_date]</span>
+            <% end %>
           </a>
         </li>
       </ul>
