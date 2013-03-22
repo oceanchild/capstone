@@ -11,6 +11,8 @@ Webapp::Application.routes.draw do
 
   get 'users/user_patient_selection'
 
+  post 'users/edit_profile' => 'users#update'
+
   root :to => "sessions#index"
 
   resources :users, :path => 'register', :only => ['new', 'create']

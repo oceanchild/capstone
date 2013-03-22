@@ -2,13 +2,13 @@
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
   <h3 id="editProfile">Edit Profile</h3>
 </div>
-<%= form_tag '/users/update', :method => 'post', :class => 'no-tail', :id => 'edit-profile-form' do %>
+<%= form_tag '/users', :method => 'post', :class => 'no-tail', :id => 'edit-profile-form' do %>
 <!--
 <% if controller.controller_name=='users' %>
   <div class="error_messages">
-    <% if @patient.errors.any? %>
+    <% if @user.errors.any? %>
     <ul>
-      <% for message in @patient.errors.full_messages %>
+      <% for message in @user.errors.full_messages %>
         <li class="text-error"><%= message %></li>
       <% end %>
     </ul>
@@ -20,33 +20,38 @@
 -->
   <div class="modal-body">
     <span class="span12">
-      <label class="form-label span3">First Name:</label>
-      <input class="" type="text" readonly value="" />
+      <label class="form-label span4">Email(Username):</label>
+      <%= text_field_tag 'user[email]', @user.email, :placeholder => 'Email address (Username)', :required => true, :tabindex => '1' %>
+    </span>
+    <!--
+    <span class="span12">
+      <label class="form-label span4">Password:</label>
+      <%= password_field_tag 'user[password]', @user.password, :placeholder => 'Password', :required => true, :tabindex => '1' %>
     </span>
     <span class="span12">
-      <label class="form-label span3">Last Name:</label>
-      <input class="" type="text" readonly value="" />
+      <label class="form-label span4">Password Confirm:</label>
+      <%= password_field_tag 'user[password_confirmation]', @user.password, :placeholder => 'Password Confirm', :required => true, :tabindex => '1' %>
+    </span>
+    -->
+    <span class="span12">
+      <label class="form-label span4">Last Name:</label>
+      <%= text_field_tag 'user[last_name]', @user.last_name, :placeholder => 'Last Name', :required => true, :tabindex => '1' %>
     </span>
     <span class="span12">
-      <label class="form-label span3">Gender:</label>
-      <span class="force-tail">
-        <label class="radio inline span3">
-          <input type="radio" name="gender" disabled="disabled"  />
-          Male
-        </label>
-        <label class="radio inline span3">
-          <input type="radio" name="gender" disabled="disabled" checked="checked"/>
-          Female
-        </label>
-      </span>
+      <label class="form-label span4">First Name:</label>
+    <%= text_field_tag 'user[first_name]', @user.first_name, :placeholder => 'First Name', :required => true, :tabindex => '1' %>
     </span>
     <span class="span12">
-      <label class="form-label span3">Phone:</label>
-      <input class="" type="text" readonly value="" />
+      <label class="form-label span4">Phone:</label>
+      <%= text_field_tag 'user[phone]', @user.phone, :placeholder => 'Phone Number', :required => true, :tabindex => '1' %>
     </span>
     <span class="span12">
-      <label class="form-label span3">Address:</label>
-      <input class="" type="text" readonly value="" />
+      <label class="form-label span4">Address:</label>
+      <%= text_field_tag 'user[address]', @user.address, :placeholder => 'Address', :required => true, :tabindex => '1' %>
+    </span>
+    <span class="span12">
+      <label class="form-label span4">User Type:</label>
+      <%= text_field_tag 'user[usertype]', @user.usertype, :placeholder => 'Address', :required => true, :tabindex => '1', :readonly => 'readonly' %>
     </span>
   </div>
   <div class="modal-footer">
