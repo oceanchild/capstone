@@ -387,8 +387,15 @@
       $(this).addClass('active');
       var i = $(this).index('.patient-list');
       refreshPatient(i);
+      refreshNote(i);
     });
   });
+  function refreshNote(i){
+    for (var j=0; j<patients.data.length; j++){
+        document.getElementById("note_patient_"+patients.data[j].id).style.display="none";
+      }
+      document.getElementById("note_patient_"+patients.data[i].id).style.display="";
+  }
   function refreshPatient(i) {
     var patientStatusDom = $('#patient-profile');
     $('#patient-profile-avatar').attr('src', patients.data[i].avatar_uri);
