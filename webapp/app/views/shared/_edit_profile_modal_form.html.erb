@@ -2,7 +2,7 @@
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
   <h3 id="editProfile">Edit Profile</h3>
 </div>
-<%= form_tag '/users', :method => 'post', :class => 'no-tail', :id => 'edit-profile-form' do %>
+<%= form_tag '/users/edit_profile', :method => 'post', :class => 'no-tail', :id => 'edit-profile-form' do %>
 <!--
 <% if controller.controller_name=='users' %>
   <div class="error_messages">
