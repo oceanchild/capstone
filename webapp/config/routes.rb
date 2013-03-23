@@ -23,6 +23,8 @@ Webapp::Application.routes.draw do
 
   resources :prescriptions
 
+  resources :notes
+
   resources :sessions, :path => 'login'
 
   # The priority is based upon order of creation:

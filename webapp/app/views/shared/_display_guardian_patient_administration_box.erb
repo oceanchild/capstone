@@ -14,130 +14,42 @@
       <!-- Button to trigger add note modal -->
       <a href="#add-note" id="add-note-btn" class="btn btn-primary force-tail">Add New Note</a>
       <!-- Add note modal -->
-      <div id="add-note-form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addNote" aria-hidden="true">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 id="addNote">New Note</h3>
+      <%= form_tag '/notes', :method => 'post' do %>
+        <div id="add-note-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addNote" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="addNote">New Note</h3>
+          </div>
+          <div class="modal-body">
+            <%= text_area_tag 'note[content]', nil, :rows => 6, :class=>"span9", :required => true %>
+            <%= hidden_field_tag 'note[patient_id]', nil %>
+            <%= hidden_field_tag 'note[author_id]', session[:user_id] %>
+            <!-- <span class="span3 pull-right"><img class="img-rounded" src="/assets/avatars/dp8.jpg" alt="" /></span> -->
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary">Submit</button>
+          </div>
         </div>
-        <div class="modal-body">
-          <textarea rows="6" class="span9"></textarea><span class="span3 pull-right"><img class="img-rounded" src="/assets/avatars/dp8.jpg" alt="" /></span>
-        </div>
-        <div class="modal-footer">
-          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-          <button class="btn btn-primary">Submit</button>
-        </div>
-      </div><!--/modal -->
+      <% end %><!--/modal -->
       <ul class="nav nav-tabs nav-stacked no-tail slider-tab">
         <li class="active">
           <a class="clearfix">
-            <span class="pull-left">[level_1_note_1_topic]</span>
             <br />
-            <div class="conversation">
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
+            <% @patient.each do |_patient| %>
+              <div class="conversation" id="note_patient_<%= _patient.id %>" style="display:none;">
+                <% @note[_patient.id].each do |_note| %>
+                  <div class="well well-small no-tail clearfix">
+                    <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                    <div class="span11">
+                      <span class="pull-right"><%= _note.date_created %></span>
+                      <b><%= _note.first_name %>&nbsp;<%= _note.last_name %>:&nbsp;</b>
+                      <%= _note.content %>
+                    </div>
+                  </div>
+                <% end %>
               </div>
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
-              </div>
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
-              </div>
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
-              </div>
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a class="clearfix">
-            <span class="pull-left">[level_1_note_1_topic]</span>
-            <br />
-            <div class="conversation">
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
-              </div>
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
-              </div>
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
-              </div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a class="clearfix">
-            <span class="pull-left">[level_1_note_1_topic]</span>
-            <br />
-            <div class="conversation">
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
-              </div>
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
-              </div>
-              <div class="well well-small no-tail clearfix">
-                <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                <div class="span11">
-                  <span class="pull-right">[note_date]</span>
-                  <b>[note_author]:&nbsp;</b>
-                  [note_content]
-                </div>
-              </div>
-            </div>
+            <% end %>
           </a>
         </li>
       </ul>

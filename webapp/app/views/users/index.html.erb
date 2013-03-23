@@ -391,10 +391,13 @@
     });
   });
   function refreshNote(i){
+  //   }
     for (var j=0; j<patients.data.length; j++){
         document.getElementById("note_patient_"+patients.data[j].id).style.display="none";
       }
       document.getElementById("note_patient_"+patients.data[i].id).style.display="";
+      document.getElementById("note_patient_id").value = patients.data[i].id;
+  //     //change the note patient id in add new note page
   }
   function refreshPatient(i) {
     var patientStatusDom = $('#patient-profile');
