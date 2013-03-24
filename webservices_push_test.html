@@ -12,10 +12,17 @@
     var ss = today.getSeconds();
     today_str = yyyy + '-' + mm + '-' + dd + ' ' + hh + ':' + mm + ':' + ss;
     var patient_data = {
-      'heart_rate': 80,
-      'blood_pressure_h': 220,
-      'blood_pressure_l': 100,
-      'last_emergency': today_str,
+      'data': [
+        {
+          'fall_data': [[343, 54, 57], [875, 457, 23], [487, 34, 21]],
+          'pulse_data': [101, 85, 135],
+          'blood_pressure_h': 220,
+          'blood_pressure_l': 100,
+          'battery_life': 857,
+          'status_message': 'URGENT',
+          'time': today_str
+        }
+      ]
     };
     $(document).ready(function() {
       $('#submit').click(function(e) {

@@ -6,9 +6,9 @@ import json
 app = bottle.Bottle()
 
 @app.route('/')
-def test():
+def push_test():
 	''' Render testing page '''
-	return bottle.static_file('test.html', './')
+	return bottle.static_file('webservices_push_test.html', './')
 
 @app.post('/push')
 def push():
@@ -22,17 +22,47 @@ def push():
 	print json_obj
 
 	''' Submit patient monitoring data '''
-	hr = json_obj['heart_rate']
-	bph = json_obj['blood_pressure_h']
-	bpl = json_obj['blood_pressure_l']
-	le = json_obj['last_emergency']
-	query = ('INSERT INTO monitored_status(patient_id, heart_rate, blood_pressure_h, blood_pressure_l, last_emergency) values(%s, %s, %s, %s, "%s")' % (str(172), hr, bph, bpl, le))
+	json_obj = json_obj['data'][0]
+	fall_data_list = json_obj['fall_data']
+	pulse_data_list = json_obj['pulse_data']
+	blood_pressure_h = json_obj['blood_pressure_h']
+	blood_pressure_l = json_obj['blood_pressure_l']
+	battery_life = json_obj['battery_life']
+	status_message = json_obj['status_message']
+
+	next = True
+
+	query = ('INSERT INTO monitored_status(patient_id, blood_pressure_h, blood_pressure_l, battery_life, status_message) VALUES(%s, %s, %s, %s, "%s")' % (str(172), blood_pressure_h, blood_pressure_l, battery_life, status_message))
 	try:
 		cur.execute(query)
-		conn.commit()
 	except:
 		conn.rollback()
+		next = False
 		print 'Error: unable to insert data'
+
+	entry_id = cur.lastrowid
+
+	if next:
+		for fd in fall_data_list:
+			q = ('INSERT INTO fall_status(monitored_status_id, x_cord, y_cord, z_cord) VALUES(%s, %s, %s, %s)' % (entry_id, fd[0], fd[1], fd[2]))
+			try:
+				cur.execute(q)
+			except:
+				conn.rollback()
+				next = False
+				print 'Error: unable to insert data'
+				break
+
+	if next:
+		for pd in pulse_data_list:
+			q = ('INSERT INTO heart_rates(monitored_status_id, pulse) VALUES(%s, %s)' % (entry_id, pd))
+			try:
+				cur.execute(q)
+				conn.commit() # save all previous changes
+			except:
+				conn.rollback()
+				next = False
+				print 'Error: unable to insert data'
 	
 	''' Close connection '''
 	cur.close()
