@@ -380,6 +380,16 @@
       <% end %>
     ]
   };
+  var heartRates = {
+    'data': [
+      <% @heartRate.each do |_hearRate| %>
+      {
+        'last_updated': '<%= _hearRate.last_updated %>',
+        'pulse': '<%= _hearRate.pulse%>'
+      },
+      <% end %>
+    ]
+  };
   // patient tab switches click action
   $(document).ready(function() {
     $('#patient-selection').delegate('.patient-list', 'click', function() {
@@ -388,10 +398,20 @@
       var i = $(this).index('.patient-list');
       refreshPatient(i);
       refreshNote(i);
+      refreshHeartRate(i);
     });
   });
+  function refreshHeartRate(i){
+    var j = 0;
+    j=j+i*3;
+    k=0;
+    while(k<3){
+      document.getElementById("heartRate_date_"+(k+1)).innerHTML = heartRates.data[j+k].last_updated;
+      document.getElementById("heartRate_"+(k+1)).innerHTML = heartRates.data[j+k].pulse;
+      k++;
+    }
+  }
   function refreshNote(i){
-  //   }
     for (var j=0; j<patients.data.length; j++){
         document.getElementById("note_patient_"+patients.data[j].id).style.display="none";
       }

@@ -3,7 +3,19 @@
     <h4>Patient Information:</h4>
     <div class="span12 no-margin">
       <dl class="span9" id="patient-status">
-        <dd class="clearfix"><span class="label label-info">Latest Heart Rate:</span><span class="label pull-right patient-status-row">loading...</span></dd>
+        <dd class="clearfix"><span class="label label-info">Recent Heart Rates:</span></dd>
+        <dd class="clearfix">
+          <span class="" id="heartRate_date_1"><%= @heartRate[3].pulse %></span>
+          <span class="label pull-right patient-status-row" id="heartRate_1"></span>
+        </dd>
+        <dd class="clearfix">
+          <span class="" id="heartRate_date_2"></span>
+          <span class="label pull-right patient-status-row" id="heartRate_2"></span>
+        </dd>
+        <dd class="clearfix">
+          <span class="" id="heartRate_date_3"></span>
+          <span class="label pull-right patient-status-row" id="heartRate_3"></span>
+        </dd>
         <dd class="clearfix"><span class="label label-info">Latest Blood Pressure:</span><span class="label pull-right patient-status-row">loading...</span></dd>
         <dd class="clearfix"><span class="label label-info">Heath Status:</span><span class="label pull-right patient-status-row">loading...</span></dd>
         <dd class="clearfix"><span class="label label-info">Fall Status:</span><span class="label pull-right patient-status-row">loading...</span></dd>

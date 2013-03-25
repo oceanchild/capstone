@@ -33,6 +33,10 @@ class UsersController < ApplicationController
     @prescription = Prescription.find_by_sql(["select p.direction, p.servings_per_day, p.quantities_per_serving, p.start_date, p.end_date, s.name, u.first_name, u.last_name from prescriptions as p, pills as s, users as u where p.pill_id = s.id and p.doctor_id = u.id"])
   
     @allPills = Pill.find_by_sql(["select id, name from pills"])
+
+    # @heartRate = HeartRate.find_by_sql(["select h.pulse, time(m.last_updated) as last_updated from heart_rates as h, monitored_status as m, associations as a where h.monitored_status_id = m.id and m.patient_id = a.patient_id and a.user_id", _current_id.to_i]).collect{|x| [x.pulse, x.last_updated]}
+    @heartRate = HeartRate.find_by_sql(["select h.pulse, time(m.last_updated) as last_updated from heart_rates as h, monitored_status as m, associations as a where h.monitored_status_id = m.id and m.patient_id = a.patient_id and a.user_id", _current_id.to_i])
+
   end
 
   def new
