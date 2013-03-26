@@ -406,7 +406,7 @@
     j=j+i*3;
     k=0;
     while(k<3){
-      document.getElementById("heartRate_date_"+(k+1)).innerHTML = heartRates.data[j+k].last_updated;
+      document.getElementById("heartRate_date_"+(k+1)).innerHTML = "&nbsp;&nbsp;"+heartRates.data[j+k].last_updated;
       document.getElementById("heartRate_"+(k+1)).innerHTML = heartRates.data[j+k].pulse;
       k++;
     }
