@@ -17,5 +17,5 @@ pickle-email-*.html
 */log/*
 */logs/*
 */tmp/*
-*/database.yml
+database.yml
 .DS_Store
