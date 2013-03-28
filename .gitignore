@@ -14,11 +14,8 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
-**/log/*
-**/logs/*
-**/tmp/*
-**/temp/*
-database.yml
-**/database.yml
+*/log/*
+*/logs/*
+*/tmp/*
+*/database.yml
 .DS_Store
-**/.DS_Store
