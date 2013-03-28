@@ -390,6 +390,17 @@
       <% end %>
     ]
   };
+  var doctorForPatients = {
+    'data': [
+      <% @doctorForPatient.each do |_doctorForPatient| %>
+      {
+        'id': '<%= _doctorForPatient.patient_id %>',
+        'first_name': '<%= _doctorForPatient.first_name%>',
+        'last_name': '<%= _doctorForPatient.last_name%>'
+      },
+      <% end %>
+    ]
+  };
   // patient tab switches click action
   $(document).ready(function() {
     $('#patient-selection').delegate('.patient-list', 'click', function() {
@@ -399,8 +410,17 @@
       refreshPatient(i);
       refreshNote(i);
       refreshHeartRate(i);
+      refreshDoctor(i);
     });
   });
+  function refreshDoctor(i){
+    var thePatient = patients.data[i].id;
+    alert(doctorForPatients.data.length);
+    for(i=0;i<10;i++){
+
+    }
+    document.getElementById("doctor_name_1").innerHTML = "";
+  }
   function refreshHeartRate(i){
     var j = 0;
     j=j+i*3;
