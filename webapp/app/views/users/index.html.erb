@@ -382,10 +382,10 @@
   };
   var heartRates = {
     'data': [
-      <% @heartRate.each do |_hearRate| %>
+      <% @heartRate.each do |_heartRate| %>
       {
-        'last_updated': '<%= _hearRate.last_updated %>',
-        'pulse': '<%= _hearRate.pulse%>'
+        'last_updated': '<%= _heartRate.last_updated %>',
+        'pulse': '<%= _heartRate.pulse%>'
       },
       <% end %>
     ]
