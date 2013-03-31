@@ -384,7 +384,6 @@
     'data': [
       <% @heartRate.each do |_heartRate| %>
       {
-        'last_updated': '<%= _heartRate.last_updated %>',
         'pulse': '<%= _heartRate.pulse%>'
       },
       <% end %>
