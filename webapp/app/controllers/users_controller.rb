@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
     #doctor for each patient
     #if patient id cannot be found in doctorForPatient, then there is no doctor assigned to this patient
-    @doctorForPatient = User.find_by_sql(["select temp.patient_id, a. user_id, u.first_name, u.last_name,u.usertype from (select a.user_id, a.patient_id from users as u, associations as a where u.id = ? and u.id=a.user_id) as temp, associations as a, users as u where a.patient_id = temp.patient_id and u.id=a.user_id and u.usertype<>'Guardian' and u.usertype= 'Doctor' order by temp.patient_id", _current_id.to_i])
+    @doctorForPatient = User.find_by_sql(["select temp.patient_id, a.user_id, u.first_name, u.last_name,u.usertype from (select a.user_id, a.patient_id from users as u, associations as a where u.id = ? and u.id=a.user_id) as temp, associations as a, users as u where a.patient_id = temp.patient_id and u.id=a.user_id and u.usertype<>'Guardian' and u.usertype= 'Doctor' order by temp.patient_id", _current_id.to_i])
   end
 
   def new
