@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @allPills = Pill.find_by_sql(["select id, name from pills"])
 
     # @heartRate = HeartRate.find_by_sql(["select h.pulse, time(m.last_updated) as last_updated from heart_rates as h, monitored_status as m, associations as a where h.monitored_status_id = m.id and m.patient_id = a.patient_id and a.user_id", _current_id.to_i]).collect{|x| [x.pulse, x.last_updated]}
-    @heartRate = HeartRate.find_by_sql(["select h.pulse from heart_rates as h, monitored_status as m, associations as a where h.monitored_status_id = m.id and m.patient_id = a.patient_id and a.user_id", _current_id.to_i])
+    @heartRate = HeartRate.find_by_sql(["select m.patient_id, floor(avg(h.pulse)) as pulse, time(m.last_updated) as last_updated from heart_rates as h, monitored_status as m, associations as a where h.monitored_status_id = m.id and m.patient_id = a.patient_id and a.user_id = ? group by patient_id", _current_id.to_i])
 
     #doctor for each patient
     #if patient id cannot be found in doctorForPatient, then there is no doctor assigned to this patient

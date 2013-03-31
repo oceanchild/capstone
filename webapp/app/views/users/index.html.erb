@@ -383,8 +383,10 @@
   var heartRates = {
     'data': [
       <% @heartRate.each do |_heartRate| %>
-      {
-        'pulse': '<%= _heartRate.pulse%>'
+      {  
+          'last_updated': '<%= _heartRate.last_updated %>',
+          'pulse': '<%= _heartRate.pulse%>',
+          'patient_id': '<%= _heartRate.patient_id%>'
       },
       <% end %>
     ]
@@ -414,19 +416,19 @@
   });
   function refreshDoctor(i){
     var thePatient = patients.data[i].id;
-    alert(doctorForPatients.data.length);
+    // alert(doctorForPatients.data.length);
     for(i=0;i<10;i++){
 
     }
     document.getElementById("doctor_name_1").innerHTML = "";
   }
   function refreshHeartRate(i){
-    var j = 0;
-    j=j+i*3;
-    k=0;
-    while(k<3){
-      document.getElementById("heartRate_"+(k+1)).innerHTML = heartRates.data[j+k].pulse;
-      k++;
+    if (heartRates.data[i] == undefined ){
+      document.getElementById("heartRate_date").innerHTML = "&nbsp;&nbsp;"+"N/A";
+      document.getElementById("heartRate").innerHTML = "N/A";
+    }else{
+      document.getElementById("heartRate_date").innerHTML = "&nbsp;&nbsp;"+heartRates.data[i].last_updated;
+      document.getElementById("heartRate").innerHTML = heartRates.data[i].pulse;
     }
   }
   function refreshNote(i){
