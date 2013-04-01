@@ -53,15 +53,7 @@
             <span class="pull-right"></span>
             <br>
             <% @prescription.each do |_p|%>
-                <div class="well well-small no-tail clearfix">
-                  <div class="span1"><img class="img-rounded" src="/assets/pill1.jpg" alt=""></div>
-                  <div class="span11">
-                    <dt><%= _p.name%>: Doctor <%= _p.first_name %> <%= _p.last_name %></dt>
-                    <dd>Start from <b><%= _p.start_date %></b> to <b><%= _p.end_date %></b></dd>
-                    <dd><%= _p.direction%></dd>
-                    <dd>Instruction: <%= _p.servings_per_day %> time(s) per day, <%= _p.quantities_per_serving %> pill(s) per serving </dd>
-                  </div>
-                </div>
+                <%= _p%>
             <% end %>
           </a>
         </li>
