@@ -402,6 +402,11 @@
       <% end %>
     ]
   };
+  var notes = {
+    'data': [
+    ]
+  }
+
   // patient tab switches click action
   $(document).ready(function() {
     $('#patient-selection').delegate('.patient-list', 'click', function() {
@@ -483,6 +488,7 @@
 
 <script type="text/javascript">
   /* Ajax form submission actions */
+
   // add patient
   $('#add-patient-modal').delegate('#add-patient-form', 'submit', function(e) {
     var formUrl = $(this).attr('action');
@@ -540,7 +546,7 @@
       }
     });
     e.preventDefault();
-    return false; // in JQuery "return false" == e.preventDefault() && e.stopPropagation()
+    return false; // in JQuery "return false" == (e.preventDefault() && e.stopPropagation())
   });
   // remove patients
   $('#remove-patient-modal').delegate('#remove-patient-form', 'submit', function(e) {
@@ -589,7 +595,28 @@
       }
     });
     e.preventDefault();
-    return false; // in JQuery "return false" == e.preventDefault() && e.stopPropagation()
+    return false; // in JQuery "return false" == (e.preventDefault() && e.stopPropagation())
+  });
+
+  // add note
+  $('#add-note-modal').delegate('#add-note-form', 'submit', function(e) {
+    var formUrl = $(this).attr('action');
+    var formData = $(this).serialize();
+    $.ajax({
+      url: formUrl,
+      type: 'post',
+      data: formData,
+    }).done(function(response) {
+      var responseValue = $(response).filter('#return-status').eq(0).val();
+      if (responseValue) {
+        $('#remove-patient-modal').modal('hide');
+        // push the new note to the Json object 'notes'
+
+      }
+      console.log(response);
+    });
+    e.preventDefault();
+    return false; // in JQuery "return false" == (e.preventDefault() && e.stopPropagation())
   });
 </script>
 

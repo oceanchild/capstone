@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <h3 id="addNote">New Note</h3>
+</div>
+<%= form_tag '/notes', :method => 'post', :class => 'no-tail', :id => 'add-patient-form' do %>
+  <div class="modal-body">
+    <%= text_area_tag 'note[content]', nil, :rows => 6, :class=>"span9", :required => true %>
+    <%= hidden_field_tag 'note[patient_id]', nil %>
+    <%= hidden_field_tag 'note[author_id]', session[:user_id] %>
+    <!-- <span class="span3 pull-right"><img class="img-rounded" src="/assets/avatars/dp8.jpg" alt="" /></span> -->
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Submit</button>
+  </div>
+<% end %>

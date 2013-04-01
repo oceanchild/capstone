@@ -14,28 +14,12 @@
       <!-- Button to trigger add note modal -->
       <a href="#add-note" id="add-note-btn" class="btn btn-primary force-tail">Add New Note</a>
       <!-- Add note modal -->
-      <%= form_tag '/notes', :method => 'post' do %>
         <div id="add-note-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addNote" aria-hidden="true">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="addNote">New Note</h3>
-          </div>
-          <div class="modal-body">
-            <%= text_area_tag 'note[content]', nil, :rows => 6, :class=>"span9", :required => true %>
-            <%= hidden_field_tag 'note[patient_id]', nil %>
-            <%= hidden_field_tag 'note[author_id]', session[:user_id] %>
-            <!-- <span class="span3 pull-right"><img class="img-rounded" src="/assets/avatars/dp8.jpg" alt="" /></span> -->
-          </div>
-          <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary">Submit</button>
-          </div>
-        </div>
-      <% end %><!--/modal -->
+          <%= render 'shared/add_note_modal_form' %>
+        </div><!--/modal -->
       <ul class="nav nav-tabs nav-stacked no-tail slider-tab">
         <li class="active">
           <a class="clearfix">
-            <br />
             <% @patient.each do |_patient| %>
               <div class="conversation" id="note_patient_<%= _patient.id %>" style="display:none;">
                 <% @note[_patient.id].each do |_note| %>

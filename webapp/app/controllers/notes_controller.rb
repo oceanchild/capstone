@@ -5,7 +5,12 @@ class NotesController < ApplicationController
 
   def create
   	@note = Note.new(params[:note])
-  	@note.save
-  	redirect_to :controller => 'users', :action => 'index'
+  	if @note.save
+      # redirect_to :controller => 'users', :action => 'index'
+      render :inline => '<input type="hidden" id="return-status" value="success" />'
+    else
+      flash.now.alert = 'Destroy patient failed, please try again.'
+      render :nothing => true
+    end
   end
 end
