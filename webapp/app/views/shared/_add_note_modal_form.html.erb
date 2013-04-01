@@ -2,7 +2,20 @@
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
   <h3 id="addNote">New Note</h3>
 </div>
-<%= form_tag '/notes', :method => 'post', :class => 'no-tail', :id => 'add-patient-form' do %>
+<%= form_tag '/notes', :method => 'post', :class => 'no-tail', :id => 'add-note-form' do %>
+<% if controller.controller_name=='patients' %>
+  <div class="error_messages">
+    <% if @patient.errors.any? %>
+    <ul>
+      <% for message in @patient.errors.full_messages %>
+        <li class="text-error"><%= message %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+<% else %>
+  <div class="error_messages"></div>
+<% end %>
   <div class="modal-body">
     <%= text_area_tag 'note[content]', nil, :rows => 6, :class=>"span9", :required => true %>
     <%= hidden_field_tag 'note[patient_id]', nil %>
@@ -11,6 +24,6 @@
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Submit</button>
+    <%= button_tag 'Add', :type => 'submit', :class => 'btn btn-primary' %>
   </div>
 <% end %>

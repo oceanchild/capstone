@@ -503,7 +503,7 @@
 
     // console.log(patients.data[1].prescriptions[0].name);
     $('#prescription-list').empty();
-    
+
     if(patients.data[i].prescriptions[0] == undefined){
       //do nothing since there is no prescription for this patient
     }else{
@@ -689,7 +689,7 @@
     }).done(function(response) {
       var responseValue = $(response).filter('#return-status').eq(0).val();
       if (responseValue) {
-        $('#remove-patient-modal').modal('hide');
+        $('#add-note-modal').modal('hide');
         var date = new Date();
         var dateStr = date.getUTCFullYear() + '-' + ('0'+(date.getUTCMonth()+1)).slice(-2) + '-' + ('0'+date.getUTCDate()).slice(-2) + ' ' + ('0'+date.getUTCHours()).slice(-2) + ':' + ('0'+date.getUTCMinutes()).slice(-2) + ':' + ('0'+date.getUTCSeconds()).slice(-2);
         // push the new note to the Json object 'notes'
