@@ -12,42 +12,19 @@
   <div class="tab-content well bordered">
     <div class="tab-pane fade in active" id="tab1">
       <!-- Button to trigger add note modal -->
-      <a href="#add-note" id="add-note-btn" class="btn btn-primary force-tail">Add New Note</a>
+      <a href="#add-note" id="add-note-btn" class="btn btn-primary">Add New Note</a>
       <!-- Add note modal -->
-        <div id="add-note-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addNote" aria-hidden="true">
-          <%= render 'shared/add_note_modal_form' %>
-        </div><!--/modal -->
-      <ul class="nav nav-tabs nav-stacked no-tail slider-tab">
-        <li class="active">
-          <a class="clearfix">
-            <% @patient.each do |_patient| %>
-              <div class="conversation" id="note_patient_<%= _patient.id %>" style="display:none;">
-                <% @note[_patient.id].each do |_note| %>
-                  <div class="well well-small no-tail clearfix">
-                    <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
-                    <div class="span11">
-                      <span class="pull-right"><%= _note.date_created %></span>
-                      <b><%= _note.first_name %>&nbsp;<%= _note.last_name %>:&nbsp;</b>
-                      <%= _note.content %>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
-          </a>
-        </li>
-      </ul>
+      <div id="add-note-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addNote" aria-hidden="true">
+        <%= render 'shared/add_note_modal_form' %>
+      </div><!--/modal -->
+      <ul class="nav nav-tabs nav-stacked no-tail slider-tab" id="patient-notes"></ul>
     </div>
     <div class="tab-pane fade in" id="tab2">
       <ul class="nav nav-tabs nav-stacked no-tail slider-tab">
         <li class="active">
           <a class="clearfix">
-            <span class="pull-left">[prescription_name]</span>
-            <span class="pull-right">[from_to_date]</span>
-            <br>
             <div class="conversation">
-             <div id="prescription-list">
-            </div>
+              <div id="prescription-list"></div>
             </div>
           </a>
         </li>
