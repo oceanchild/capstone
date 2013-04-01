@@ -21,7 +21,18 @@
         <li class="active">
           <a class="clearfix">
             <% @patient.each do |_patient| %>
-              
+              <div class="conversation" id="note_patient_<%= _patient.id %>" style="display:none;">
+                <% @note[_patient.id].each do |_note| %>
+                  <div class="well well-small no-tail clearfix">
+                    <div class="span1"><img class="img-rounded" src="/assets/avatars/dp1.jpg" alt="" /></div>
+                    <div class="span11">
+                      <span class="pull-right"><%= _note.date_created %></span>
+                      <b><%= _note.first_name %>&nbsp;<%= _note.last_name %>:&nbsp;</b>
+                      <%= _note.content %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
             <% end %>
           </a>
         </li>
@@ -33,15 +44,7 @@
           <a class="clearfix">
             <div class="conversation">
               <% @prescription.each do |_p|%>
-                <div class="well well-small no-tail clearfix">
-                  <div class="span1"><img class="img-rounded" src="/assets/pill1.jpg" alt=""></div>
-                  <div class="span11">
-                    <dt><%= _p.name%>: Doctor <%= _p.first_name %> <%= _p.last_name %></dt>
-                    <dd>Start from <b><%= _p.start_date %></b> to <b><%= _p.end_date %></b></dd>
-                    <dd><%= _p.direction%></dd>
-                    <dd>Instruction: <%= _p.servings_per_day %> time(s) per day, <%= _p.quantities_per_serving %> pill(s) per serving </dd>
-                  </div>
-                </div>
+                
               <% end %>
             </div>
           </a>
