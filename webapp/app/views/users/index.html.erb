@@ -367,7 +367,7 @@
       <% @patient.each do |_patient| %>
       {
         'id': '<%= _patient.id %>',
-        'first_name': '<%= _patient.first_name%>',
+        'first_name': '<%= _patient.first_name %>',
         'last_name': '<%= _patient.last_name %>',
         'age': '<%= _patient.age %>',
         'gender': '<%= _patient.gender %>',
@@ -375,7 +375,18 @@
         'address': '<%= _patient.address %>',
         'symptoms': '<%= _patient.symptoms %>',
         'health_status': '<%= _patient.health_status %>',
-        'avatar_uri': '<%= _patient.avatar %>'
+        'avatar_uri': '<%= _patient.avatar %>',
+
+        'notes': [
+          <% @note[_patient.id].each do |_note| %>
+          {
+            'first_name': '<%= _note.first_name %>',
+            'last_name': '<%= _note.last_name %>',
+            'date_created': '<%= _note.date_created %>',
+            'content': '<%= _note.content %>'
+          }, 
+          <% end %>
+        ]
       },
       <% end %>
     ]
@@ -402,10 +413,6 @@
       <% end %>
     ]
   };
-  var notes = {
-    'data': [
-    ]
-  }
 
   // patient tab switches click action
   $(document).ready(function() {
