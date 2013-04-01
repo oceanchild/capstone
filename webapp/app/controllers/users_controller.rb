@@ -12,25 +12,25 @@ class UsersController < ApplicationController
 
     @numPatient = @patient.count
 
-    @note = []
-    @pillInstance = []
+    @note = {}
+    @pillInstance = {}
     _myPatient.each do |_myPatient|
       @note[_myPatient.patient_id] = Note.find_by_sql(["select n.content, n.date_created, u.last_name, u.first_name from notes as n, users as u where n.patient_id = ? and u.id = n.author_id order by n.date_created desc", _myPatient.patient_id])
     end
 
     #the following code is not efficient, but it works well
-    @noteAuthor = []
+    @noteAuthor = {}
     _allContact = User.all
     _allContact.each do |_contact|
       @noteAuthor[_contact.id] = _contact.first_name + " " + _contact.last_name
     end
 
-    @primaryContact = []
+    @primaryContact = {}
     _myPatient.each do |_myPatient|
       @primaryContact[_myPatient.patient_id] = User.find_by_sql(["select c.first_name, c.last_name, c.phone, c.address from users as c, associations as j where c.id=j.user_id and j.patient_id=? and c.usertype='Guardian'", _myPatient.patient_id])
     end
 
-    @prescription = Prescription.find_by_sql(["select p.direction, p.servings_per_day, p.quantities_per_serving, p.start_date, p.end_date, s.name, u.first_name, u.last_name from prescriptions as p, pills as s, users as u where p.pill_id = s.id and p.doctor_id = u.id"])
+    @prescription = Prescription.find_by_sql(["select u.first_name, u.last_name, pa.first_name, pa.last_name, p.direction, p.servings_per_day, p.quantities_per_serving, p.start_date, p.end_date, pills.name from associations as a, users as u, patients as pa, prescriptions as p, pills where u.id=? and a.user_id=u.id and a.patient_id=pa.id and p.patient_id=pa.id and pills.id=p.pill_id",_current_id.to_i])
   
     @allPills = Pill.find_by_sql(["select id, name from pills"])
 
