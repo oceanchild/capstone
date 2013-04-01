@@ -386,7 +386,23 @@
             'content': '<%= _note.content %>'
           }, 
           <% end %>
+        ],
+
+        'prescriptions': [
+          <% @prescription[_patient.id].each do |_prescription| %>
+          {
+            'first_name': '<%= _prescription.ufn %>',
+            'last_name': '<%= _prescription.uln %>',
+            'direction': '<%= _prescription.direction %>',
+            'servings_per_day': '<%= _prescription.servings_per_day %>',
+            'quantities_per_serving': '<%= _prescription.quantities_per_serving %>',
+            'start_date': '<%= _prescription.start_date %>',
+            'end_date': '<%= _prescription.end_date %>',
+            'name': '<%= _prescription.name %>'
+          },
+          <% end %>
         ]
+
       },
       <% end %>
     ]
@@ -424,9 +440,10 @@
       refreshNote(i);
       refreshHeartRate(i);
       refreshDoctor(i);
+      refreshPrescription(i);
     });
   });
-  function refreshDoctor(i){
+  function refreshDoctor(i) {
     var thePatient = patients.data[i].id;
     // alert(doctorForPatients.data.length);
     for(i=0;i<10;i++){
@@ -434,7 +451,7 @@
     }
     document.getElementById("doctor_name_1").innerHTML = "";
   }
-  function refreshHeartRate(i){
+  function refreshHeartRate(i) {
     if (heartRates.data[i] == undefined ){
       document.getElementById("heartRate_date").innerHTML = "&nbsp;&nbsp;"+"N/A";
       document.getElementById("heartRate").innerHTML = "N/A";
@@ -443,13 +460,38 @@
       document.getElementById("heartRate").innerHTML = heartRates.data[i].pulse;
     }
   }
-  function refreshNote(i){
+  function refreshNote(i) {
     for (var j=0; j<patients.data.length; j++){
         document.getElementById("note_patient_"+patients.data[j].id).style.display="none";
       }
       document.getElementById("note_patient_"+patients.data[i].id).style.display="";
       document.getElementById("note_patient_id").value = patients.data[i].id;
   //     //change the note patient id in add new note page
+  }
+  function refreshPrescription(i) {
+    //modify the patient id in the add prescrition hiden field
+    $('#prescription_patient_id').val(patients.data[i].id);
+
+    // console.log(patients.data[1].prescriptions[0].name);
+    $('#prescription-list').empty();
+console.log(i);
+    if(patients.data[i].prescriptions[0] == undefined){
+      //do nothing since there is no prescription for this patient
+    }else{
+      var prescriptionDom = '';
+      // console.log(i);
+      for (var j=0; j<patients.data[i].prescriptions.length;j++){
+        prescriptionDom += '<div class="well well-small no-tail clearfix">';
+        prescriptionDom += '<div class="span1"><img class="img-rounded" src="/assets/pill1.jpg" alt=""></div><div class="span11">';
+        prescriptionDom += '<dt>' + patients.data[i].prescriptions[j].name + ' : Doctor ' + patients.data[i].prescriptions[j].first_name + '&nbsp;' + patients.data[i].prescriptions[j].last_name;
+        prescriptionDom += '<dd>Start from <b>' + patients.data[i].prescriptions[j].start_date + '</b> to <b>' + patients.data[i].prescriptions[j].end_date + '</b></dd>';
+        prescriptionDom += '<dd>' + patients.data[i].prescriptions[j].direction + '</dd>';
+        prescriptionDom += '<dd>Instruction: ' + patients.data[i].prescriptions[j].servings_per_day + ' time(s) per day,' + patients.data[i].prescriptions[j].quantities_per_serving + ' pill(s) per serving </dd>';
+        prescriptionDom += '</div></div>';
+      }
+    }
+    $('#prescription-list').append(prescriptionDom);
+
   }
   function refreshPatient(i) {
     var patientStatusDom = $('#patient-profile');

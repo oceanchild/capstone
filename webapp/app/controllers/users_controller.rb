@@ -18,11 +18,11 @@ class UsersController < ApplicationController
     end
 
     #the following code is not efficient, but it works well
-    @noteAuthor = {}
-    _allContact = User.all
-    _allContact.each do |_contact|
-      @noteAuthor[_contact.id] = _contact.first_name + " " + _contact.last_name
-    end
+    # @noteAuthor = {}
+    # _allContact = User.all
+    # _allContact.each do |_contact|
+    #   @noteAuthor[_contact.id] = _contact.first_name + " " + _contact.last_name
+    # end
 
     @primaryContact = {}
     _myPatient.each do |_myPatient|
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
     @prescription={}
     _myPatient.each do |_myPatient|
-      @prescription[_myPatient.patient_id] = Prescription.find_by_sql(["select u.first_name, u.last_name, pa.first_name, pa.last_name, p.direction, p.servings_per_day, p.quantities_per_serving, p.start_date, p.end_date, pills.name from users as u, patients as pa, prescriptions as p, pills where p.doctor_id=u.id and p.patient_id=pa.id and pills.id=p.pill_id and pa.id=?",_current_id.to_i])
+      @prescription[_myPatient.patient_id] = Prescription.find_by_sql(["select u.first_name as ufn, u.last_name as uln, pa.first_name as pfn, pa.last_name as pln, p.direction, p.servings_per_day, p.quantities_per_serving, p.start_date, p.end_date, pills.name from users as u, patients as pa, prescriptions as p, pills where p.doctor_id=u.id and p.patient_id=pa.id and pills.id=p.pill_id and pa.id=?", _myPatient.patient_id])
     end
 
     @allPills = Pill.find_by_sql(["select id, name from pills"])

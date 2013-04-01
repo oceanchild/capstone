@@ -49,7 +49,7 @@
       <label class="form-label span3">Frenquency:</label>
       <%= select_tag 'prescription[servings_per_day]', '<option value=1>1 time per day</option><option value=2>2 times per day</option><option value=3>3 times per day</option>'.html_safe %>            
     </span>
-    <%= hidden_field_tag 'prescription[patient_id]', 170 %>
+    <%= hidden_field_tag 'prescription[patient_id]', nil %>
     <%= hidden_field_tag 'prescription[doctor_id]', session[:user_id] %>
   </div>
   <div class="modal-footer">
