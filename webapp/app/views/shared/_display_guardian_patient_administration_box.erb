@@ -21,11 +21,7 @@
         <li class="active">
           <a class="clearfix">
             <% @patient.each do |_patient| %>
-              <div class="conversation" id="note_patient_<%= _patient.id %>" style="display:none;">
-                <% @note[_patient.id].each do |_note| %>
-                  
-                <% end %>
-              </div>
+              
             <% end %>
           </a>
         </li>
