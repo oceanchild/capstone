@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     @note = {}
     _myPatient.each do |_myPatient|
-      @note[_myPatient.patient_id] = Note.find_by_sql(["select n.content, n.date_created, u.last_name, u.first_name from notes as n, users as u where n.patient_id = ? and u.id = n.author_id order by n.date_created desc", _myPatient.patient_id])
+      @note[_myPatient.patient_id] = Note.find_by_sql(["select n.content, n.date_created, u.last_name, u.first_name, n.author_id from notes as n, users as u where n.patient_id = ? and u.id = n.author_id order by n.date_created desc", _myPatient.patient_id])
     end
 
     #the following code is not efficient, but it works well

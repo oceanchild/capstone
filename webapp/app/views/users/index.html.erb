@@ -380,6 +380,7 @@
         'notes': [
           <% @note[_patient.id].each do |_note| %>
           {
+            'author_id': '<%= _note.author_id %>',
             'first_name': '<%= _note.first_name %>',
             'last_name': '<%= _note.last_name %>',
             'date_created': '<%= _note.date_created %>',
@@ -431,42 +432,70 @@
   };
 
   // patient tab switches click action
+  var CURRENT_USER_ID = <%= session[:user_id] %>;
+  var CURRENT_PATIENT_INDEX = 0;
   $(document).ready(function() {
     $('#patient-selection').delegate('.patient-list', 'click', function() {
       $('#patient-selection .patient-list').removeClass('active');
       $(this).addClass('active');
-      var i = $(this).index('.patient-list');
-      refreshPatient(i);
-      refreshNote(i);
-      refreshHeartRate(i);
-      refreshDoctor(i);
-      refreshPrescription(i);
+
+      CURRENT_PATIENT_INDEX = $(this).index('.patient-list');
+      refreshPatient(CURRENT_PATIENT_INDEX);
+      refreshNote(CURRENT_PATIENT_INDEX);
+      refreshHeartRate(CURRENT_PATIENT_INDEX);
+      refreshDoctor(CURRENT_PATIENT_INDEX);
+      refreshPrescription(CURRENT_PATIENT_INDEX);
     });
   });
   function refreshDoctor(i) {
     var thePatient = patients.data[i].id;
     // alert(doctorForPatients.data.length);
-    for(i=0;i<10;i++){
+    for(var i=0; i<10; i++) {
 
     }
     document.getElementById("doctor_name_1").innerHTML = "";
   }
   function refreshHeartRate(i) {
-    if (heartRates.data[i] == undefined ){
+    if (heartRates.data[i] == undefined ) {
       document.getElementById("heartRate_date").innerHTML = "&nbsp;&nbsp;"+"N/A";
       document.getElementById("heartRate").innerHTML = "N/A";
-    }else{
+    } else {
       document.getElementById("heartRate_date").innerHTML = "&nbsp;&nbsp;"+heartRates.data[i].last_updated;
       document.getElementById("heartRate").innerHTML = heartRates.data[i].pulse;
     }
   }
   function refreshNote(i) {
-    for (var j=0; j<patients.data.length; j++){
-        document.getElementById("note_patient_"+patients.data[j].id).style.display="none";
+    $('#note_patient_id').val(patients.data[i].id);
+
+    var patientData = patients.data[i];
+    var patientNotesListDom = $('#patient-notes');
+    patientNotesListDom.empty();
+    var patientNotesList = '';
+    var patientNote = '';
+    if (patients.data[i].notes.length > 0) {
+      $('#add-note-btn').removeClass('force-tail').addClass('force-tail');
+
+      patientNotesList = '<li class="active"><a class="clearfix">';
+      for (var j=0; j<patientData.notes.length; j++) {
+        patientNote = '<div class="conversation">';
+        patientNote += '<div class="well well-small no-tail clearfix">';
+        patientNote += '<div class="span1"><img class="img-rounded" src="/assets/avatars/dp' + patientData.notes[j].author_id + '.jpg" alt="" /></div>';
+        patientNote += '<div class="span11">';
+        patientNote += '<span class="pull-right">' + patientData.notes[j].date_created + '</span>';
+        patientNote += '<b>' + patientData.notes[j].first_name + '&nbsp;' + patientData.notes[j].last_name + ':&nbsp;</b>';
+        patientNote += patientData.notes[j].content;
+        patientNote += '</div></div></div></div>';
+        
+        patientNotesList += patientNote;
       }
-      document.getElementById("note_patient_"+patients.data[i].id).style.display="";
-      document.getElementById("note_patient_id").value = patients.data[i].id;
-  //     //change the note patient id in add new note page
+      patientNotesList += '</a></li>';
+
+      // append to the actual HTML document
+      patientNotesListDom.append(patientNotesList);
+      //$('#tab1').append(patientNotesListDom);
+    } else {
+      $('#add-note-btn').removeClass('force-tail');
+    }
   }
   function refreshPrescription(i) {
     //modify the patient id in the add prescrition hiden field
@@ -474,7 +503,7 @@
 
     // console.log(patients.data[1].prescriptions[0].name);
     $('#prescription-list').empty();
-console.log(i);
+    
     if(patients.data[i].prescriptions[0] == undefined){
       //do nothing since there is no prescription for this patient
     }else{
@@ -562,6 +591,8 @@ console.log(i);
           'symptoms': $('#patient_symptoms').val(),
           'health_status': $('#patient_health_status').val(),
           'avatar_uri': $('#patient_avatar').val(),
+
+          'note': []
         });
         // update patient selection, adding new .patient-list to #patient-selection
         var newPatientObj = patients.data[patients.data.length-1];
@@ -570,7 +601,7 @@ console.log(i);
         // if this is the first .patient-list been added, then activate it
         if ($('#patient-selection').find('.patient-list').length==1) {
           $('#patient-selection .patient-list').eq(0).trigger('click');
-          refreshPatient(0);
+          // refreshPatient(0);
         }
         // update user patient count
         var num = parseInt($('#number-of-patients').html()) + 1;
@@ -659,10 +690,22 @@ console.log(i);
       var responseValue = $(response).filter('#return-status').eq(0).val();
       if (responseValue) {
         $('#remove-patient-modal').modal('hide');
+        var date = new Date();
+        var dateStr = date.getUTCFullYear() + '-' + ('0'+(date.getUTCMonth()+1)).slice(-2) + '-' + ('0'+date.getUTCDate()).slice(-2) + ' ' + ('0'+date.getUTCHours()).slice(-2) + ':' + ('0'+date.getUTCMinutes()).slice(-2) + ':' + ('0'+date.getUTCSeconds()).slice(-2);
         // push the new note to the Json object 'notes'
+        patients.data[CURRENT_PATIENT_INDEX].notes.push({
+          'author_id': CURRENT_USER_ID,
+          'first_name': '<%= @user.first_name %>',
+          'last_name': '<%= @user.last_name %>',
+          'date_created': dateStr,
+          'content': $('#note_content').val()
+        });
 
+        $('#patient-selection .patient-list').eq(CURRENT_PATIENT_INDEX).trigger('click');
+      } else {
+        var newContent = $(response).find('.error_messages')[0];
+        $('#add-note-form').find('.error_messages').replaceWith(newContent);
       }
-      console.log(response);
     });
     e.preventDefault();
     return false; // in JQuery "return false" == (e.preventDefault() && e.stopPropagation())
