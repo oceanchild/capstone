@@ -122,10 +122,11 @@
     i {
       font-style: normal;
     }
-    li a {
+    li a:hover {
       cursor: pointer;
     }
     li a.btn:hover {
+      cursor: pointer;
       background-color: #E6E6E6;
     }
     li a.btn-primary:hover {
@@ -138,13 +139,27 @@
       max-width: 300px;
       white-space: normal;
     }
-    .img-select {
-      cursor: pointer;
+
+    #add-patient-avatar-selection, #edit-profile-avatar-selection {
+      padding-right: 4px;
     }
+    .img-select:hover {
+      cursor: pointer;
+      border: solid 2px #CCCCCC;
+    }
+    .img-select.active {
+      border: solid 2px #222222;
+    }
+
     .error_messages ul {
       padding: 0;
       margin: 10px 0 10px 40px;
       list-style-type: disc;
+    }
+
+    ul.nav.nav-tabs.nav-stacked {
+      max-height: 400px;
+      overflow: scroll;
     }
   </style>
   <link href="/assets/bootstrap-responsive.css" rel="stylesheet">
@@ -196,7 +211,7 @@
       <ul class="nav nav-list">
         <li class="nav-header">Profile</li>
         <li class="divider"></li>
-        <li><img class="img-rounded" src="/assets/avatars/dp3.jpg" alt="" /></li>
+        <li><img class="img-rounded" src="<%= @user.avatar %>" alt="" /></li>
         <li class="divider"></li>
         <li><a><span class="label label-inverse">Name:</span><span class="label pull-right"><%= @user.first_name %>&nbsp;<%= @user.last_name %></span></a></li>
         <li><a><span class="label label-inverse">Role:</span><span class="label pull-right"><%= @user.usertype %></span></a></li>
@@ -233,7 +248,7 @@
   <div class="container">
     <p class="muted credit">
       <span class="pull-left">Capstone Group 2 &copy; 2012-2013</span>
-            <span class="pull-right">Dillon Dixon | Jing Guo | Pablo Lam | Wendy Li | Chao Lu
+            <span class="pull-right">Dillon Dixon | Jing Guo | Pablo Lam | Wendy Li | Chao Lu</span>
     </p>
   </div>
 </div>
@@ -321,7 +336,15 @@
    */
   $(document).ready(function() {
     $('#edit-profile-btn, #edit-profile-link').click(function() {
-      $('#edit-profile-modal').modal('show');
+      $('#edit-profile-modal').modal('show').on('shown', function() {
+        $('#edit-profile-avatar-selection').height($('#edit-profile-form-fields').outerHeight());
+        $('#edit-profile-avatar-selection .img-select').each(function() {
+          if($(this).attr('src')=='<%= @user.avatar %>') {
+            $(this).removeClass('img-rounded').addClass('img-circle active');
+            return false;
+          }
+        });
+      });
     });
     $('#add-patient-btn').click(function() {
       $('#add-patient-modal').modal('show').on('shown', function() {
@@ -377,6 +400,7 @@
             'author_id': '<%= _note.author_id %>',
             'first_name': '<%= _note.first_name %>',
             'last_name': '<%= _note.last_name %>',
+            'avatar': '<%= _note.avatar %>',
             'date_created': '<%= _note.date_created %>',
             'content': '<%= _note.content %>'
           }, 
@@ -388,12 +412,12 @@
           {
             'first_name': '<%= _prescription.ufn %>',
             'last_name': '<%= _prescription.uln %>',
+            'name': '<%= _prescription.name %>',
             'direction': '<%= _prescription.direction %>',
             'servings_per_day': '<%= _prescription.servings_per_day %>',
             'quantities_per_serving': '<%= _prescription.quantities_per_serving %>',
             'start_date': '<%= _prescription.start_date %>',
-            'end_date': '<%= _prescription.end_date %>',
-            'name': '<%= _prescription.name %>'
+            'end_date': '<%= _prescription.end_date %>'
           },
           <% end %>
         ]
@@ -473,7 +497,7 @@
       for (var j=0; j<patientData.notes.length; j++) {
         patientNote = '<div class="conversation">';
         patientNote += '<div class="well well-small no-tail clearfix">';
-        patientNote += '<div class="span1"><img class="img-rounded" src="/assets/avatars/dp' + patientData.notes[j].author_id + '.jpg" alt="" /></div>';
+        patientNote += '<div class="span1"><img class="img-rounded" src="' + patientData.notes[j].avatar + '" alt="" /></div>';
         patientNote += '<div class="span11">';
         patientNote += '<span class="pull-right">' + patientData.notes[j].date_created + '</span>';
         patientNote += '<b>' + patientData.notes[j].first_name + '&nbsp;' + patientData.notes[j].last_name + ':&nbsp;</b>';
@@ -541,19 +565,27 @@
 
 <script type="text/javascript">
   // UI firing actions
-  $('#add-patient-modal').delegate('.img-select', 'hover', function(e) {
-    if (e.type==='mouseenter') {
-      $(this).removeClass('img-rounded').addClass('img-circle');
-    } else {
-      if (!$(this).hasClass('active')) {
-        $(this).removeClass('img-circle').addClass('img-rounded');
+  $(document).ready(function() {
+    $('#add-patient-modal, #edit-profile-modal').delegate('.img-select', 'hover', function(e) {
+      if(e.type==='mouseenter') {
+        $(this).removeClass('img-rounded').addClass('img-circle');
       }
-    }
-  });
-  $('#add-patient-modal').delegate('.img-select', 'click', function() {
-    $('.img-select').removeClass('img-polaroid active');
-    $(this).addClass('img-polaroid active');
-    $('#patient_avatar').val($(this).attr('src'));
+      if(e.type==='mouseleave') {
+        if (!$(this).hasClass('active')) {
+          $(this).removeClass('img-circle').addClass('img-rounded');
+        }
+      }
+    });
+    $('#add-patient-modal, #edit-profile-modal').delegate('.img-select', 'click', function(e) {
+      $('.img-circle.active').removeClass('img-circle active').addClass('img-rounded');
+      $(this).addClass('img-circle active');
+      if($(e.delegateTarget).attr('id')=='add-patient-modal') {
+        $('#patient_avatar').val($(this).attr('src'));
+      }
+      if($(e.delegateTarget).attr('id')=='edit-profile-modal') {
+        $('#user_avatar').val($(this).attr('src'));
+      }
+    });
   });
 </script>
 
@@ -585,7 +617,9 @@
           'health_status': $('#patient_health_status').val(),
           'avatar_uri': $('#patient_avatar').val(),
 
-          'note': []
+          'notes': [],
+
+          'prescriptions': []
         });
         // update patient selection, adding new .patient-list to #patient-selection
         var newPatientObj = patients.data[patients.data.length-1];
@@ -670,7 +704,6 @@
     e.preventDefault();
     return false; // in JQuery "return false" == (e.preventDefault() && e.stopPropagation())
   });
-
   // add note
   $('#add-note-modal').delegate('#add-note-form', 'submit', function(e) {
     var formUrl = $(this).attr('action');
@@ -690,6 +723,7 @@
           'author_id': CURRENT_USER_ID,
           'first_name': '<%= @user.first_name %>',
           'last_name': '<%= @user.last_name %>',
+          'avatar': '<%= @user.avatar %>',
           'date_created': dateStr,
           'content': $('#note_content').val()
         });
@@ -698,6 +732,39 @@
       } else {
         var newContent = $(response).find('.error_messages')[0];
         $('#add-note-form').find('.error_messages').replaceWith(newContent);
+      }
+    });
+    e.preventDefault();
+    return false; // in JQuery "return false" == (e.preventDefault() && e.stopPropagation())
+  });
+  // add prescription
+  $('#add-prescription-modal').delegate('#add-prescription-form', 'submit', function(e) {
+    var formUrl = $(this).attr('action');
+    var formData = $(this).serialize();
+    $.ajax({
+      url: formUrl,
+      type: 'post',
+      data: formData,
+    }).done(function(response) {
+      var responseValue = $(response).filter('#return-status').eq(0).val();
+      if (responseValue) {
+        $('#add-prescription-modal').modal('hide');
+        // push the new note to the Json object 'prescriptions'
+        patients.data[CURRENT_PATIENT_INDEX].prescriptions.push({
+          'first_name': '<%= @user.first_name %>',
+          'last_name': '<%= @user.last_name %>',
+          'name': $('#prescription_name').val(),
+          'direction': $('#prescription_direction').val(),
+          'servings_per_day': $('#prescription_servings_per_day').val(),
+          'quantities_per_serving': $('#prescription_quantities_per_serving').val(),
+          'start_date': $('#prescription_start_date').val(),
+          'end_date': $('#prescription_end_date').val()
+        });
+
+        $('#patient-selection .patient-list').eq(CURRENT_PATIENT_INDEX).trigger('click');
+      } else {
+        var newContent = $(response).find('.error_messages')[0];
+        $('#add-prescription-form').find('.error_messages').replaceWith(newContent);
       }
     });
     e.preventDefault();

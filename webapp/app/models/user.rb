@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :password_confirmation, :last_name, :first_name, :phone, :address, :usertype
+  attr_accessible :email, :password, :password_confirmation, :last_name, :first_name, :phone, :address, :usertype, :avatar
 
   has_many :associations, :dependent => :restrict
   has_many :patients, :through => :associations
@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   validates_presence_of :address
   validates_presence_of :usertype
   validates_inclusion_of :usertype, :in => ['Guardian', 'Care taker', 'Doctor']
+  validates_presence_of :avatar
 
   def self.authenticate(email, password)
     user = find_by_email(email)

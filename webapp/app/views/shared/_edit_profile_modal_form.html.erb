@@ -19,40 +19,65 @@
 <% end %>
 -->
   <div class="modal-body">
-    <span class="span12">
-      <label class="form-label span4">Email(Username):</label>
-      <%= text_field_tag 'user[email]', @user.email, :placeholder => 'Email address (Username)', :required => true, :tabindex => '1' %>
-    </span>
-    <!--
-    <span class="span12">
-      <label class="form-label span4">Password:</label>
-      <%= password_field_tag 'user[password]', @user.password, :placeholder => 'Password', :required => true, :tabindex => '1' %>
-    </span>
-    <span class="span12">
-      <label class="form-label span4">Password Confirm:</label>
-      <%= password_field_tag 'user[password_confirmation]', @user.password, :placeholder => 'Password Confirm', :required => true, :tabindex => '1' %>
-    </span>
-    -->
-    <span class="span12">
-      <label class="form-label span4">Last Name:</label>
-      <%= text_field_tag 'user[last_name]', @user.last_name, :placeholder => 'Last Name', :required => true, :tabindex => '1' %>
-    </span>
-    <span class="span12">
-      <label class="form-label span4">First Name:</label>
-    <%= text_field_tag 'user[first_name]', @user.first_name, :placeholder => 'First Name', :required => true, :tabindex => '1' %>
-    </span>
-    <span class="span12">
-      <label class="form-label span4">Phone:</label>
-      <%= text_field_tag 'user[phone]', @user.phone, :placeholder => 'Phone Number', :required => true, :tabindex => '1' %>
-    </span>
-    <span class="span12">
-      <label class="form-label span4">Address:</label>
-      <%= text_field_tag 'user[address]', @user.address, :placeholder => 'Address', :required => true, :tabindex => '1' %>
-    </span>
-    <span class="span12">
-      <label class="form-label span4">User Type:</label>
-      <%= text_field_tag 'user[usertype]', @user.usertype, :placeholder => 'Address', :required => true, :tabindex => '1', :readonly => 'readonly' %>
-    </span>
+    <div class="span9" id="edit-profile-form-fields">
+      <span class="span12">
+        <label class="form-label span4">Username:</label>
+        <%= text_field_tag 'user[email]', @user.email, :class => 'input-block-level span8', :placeholder => 'Email(Username)', :required => true, :tabindex => '1', :readonly => 'readonly' %>
+      </span>
+      <!--
+      <span class="span12">
+        <label class="form-label span4">Password:</label>
+        <%= password_field_tag 'user[password]', @user.password, :class => 'input-block-level span8', :placeholder => 'Password', :required => true, :tabindex => '1' %>
+      </span>
+      <span class="span12">
+        <label class="form-label span4">Password Confirm:</label>
+        <%= password_field_tag 'user[password_confirmation]', @user.password, :class => 'input-block-level span8', :placeholder => 'Password Confirm', :required => true, :tabindex => '1' %>
+      </span>
+      -->
+      <span class="span12">
+        <label class="form-label span4">Last Name:</label>
+        <%= text_field_tag 'user[last_name]', @user.last_name, :class => 'input-block-level span8', :placeholder => 'Last Name', :required => true, :tabindex => '1' %>
+      </span>
+      <span class="span12">
+        <label class="form-label span4">First Name:</label>
+      <%= text_field_tag 'user[first_name]', @user.first_name, :class => 'input-block-level span8', :placeholder => 'First Name', :required => true, :tabindex => '1' %>
+      </span>
+      <span class="span12">
+        <label class="form-label span4">Phone:</label>
+        <%= text_field_tag 'user[phone]', @user.phone, :class => 'input-block-level span8', :placeholder => 'Phone Number', :required => true, :tabindex => '1' %>
+      </span>
+      <span class="span12">
+        <label class="form-label span4">Address:</label>
+        <%= text_field_tag 'user[address]', @user.address, :class => 'input-block-level span8', :placeholder => 'Address', :required => true, :tabindex => '1' %>
+      </span>
+      <span class="span12">
+        <label class="form-label span4">User Type:</label>
+        <%= text_field_tag 'user[usertype]', @user.usertype, :class => 'input-block-level span8', :placeholder => 'Address', :required => true, :tabindex => '1', :readonly => 'readonly' %>
+      </span>
+    </div>
+    <div class="span3" id="edit-profile-avatar-selection" style="overflow-x: hidden; overflow-y: auto;">
+        <%= hidden_field_tag 'user[avatar]', @user.avatar %>
+        <img class="img-select img-rounded" src="/assets/avatars/dp0.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp1.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp2.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp3.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp4.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp5.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp6.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp7.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp8.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp9.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp10.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp11.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp12.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp13.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp14.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp15.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp16.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp17.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp18.jpg" />
+        <img class="img-select img-rounded" src="/assets/avatars/dp19.jpg" />
+    </div>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

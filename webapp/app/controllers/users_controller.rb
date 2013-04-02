@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     @note = {}
     _myPatient.each do |_myPatient|
-      @note[_myPatient.patient_id] = Note.find_by_sql(["select n.content, n.date_created, u.last_name, u.first_name, n.author_id from notes as n, users as u where n.patient_id = ? and u.id = n.author_id order by n.date_created desc", _myPatient.patient_id])
+      @note[_myPatient.patient_id] = Note.find_by_sql(["select n.content, n.date_created, u.last_name, u.first_name, n.author_id, u.avatar from notes as n, users as u where n.patient_id = ? and u.id = n.author_id order by n.date_created asc", _myPatient.patient_id])
     end
 
     #the following code is not efficient, but it works well
@@ -31,10 +31,10 @@ class UsersController < ApplicationController
 
     @prescription={}
     _myPatient.each do |_myPatient|
-      @prescription[_myPatient.patient_id] = Prescription.find_by_sql(["select u.first_name as ufn, u.last_name as uln, pa.first_name as pfn, pa.last_name as pln, p.direction, p.servings_per_day, p.quantities_per_serving, p.start_date, p.end_date, pills.name from users as u, patients as pa, prescriptions as p, pills where p.doctor_id=u.id and p.patient_id=pa.id and pills.id=p.pill_id and pa.id=?", _myPatient.patient_id])
+      @prescription[_myPatient.patient_id] = Prescription.find_by_sql(["select u.first_name as ufn, u.last_name as uln, pa.first_name as pfn, pa.last_name as pln, p.direction, p.servings_per_day, p.quantities_per_serving, p.start_date, p.end_date, pills.name from users as u, patients as pa, prescriptions as p, pills where p.doctor_id=u.id and p.patient_id=pa.id and pills.name=p.pill_name and pa.id=?", _myPatient.patient_id])
     end
 
-    @allPills = Pill.find_by_sql(["select id, name from pills"])
+    @allPills = Pill.find_by_sql(["select name from pills"])
 
     # @heartRate = HeartRate.find_by_sql(["select h.pulse, time(m.last_updated) as last_updated from heart_rates as h, monitored_status as m, associations as a where h.monitored_status_id = m.id and m.patient_id = a.patient_id and a.user_id", _current_id.to_i]).collect{|x| [x.pulse, x.last_updated]}
     @heartRate = HeartRate.find_by_sql(["select m.patient_id, floor(avg(h.pulse)) as pulse, time(m.last_updated) as last_updated from heart_rates as h, monitored_status as m, associations as a where h.monitored_status_id = m.id and m.patient_id = a.patient_id and a.user_id = ? group by patient_id", _current_id.to_i])

@@ -9,17 +9,12 @@ class PrescriptionsController < ApplicationController
     _date_list = params[:prescription][:end_date].split('-')
     params[:prescription][:end_date] = DateTime.new(_date_list[2].to_i, _date_list[0].to_i, _date_list[1].to_i)
   	@prescription = Prescription.new(params[:prescription])
-  	@prescription.save
-  	redirect_to :controller => 'users', :action => 'index'
-
-	# @patient = Patient.new(params[:patient])
- #    if @patient.save
- #      @patient.associations.create(:patient_id => @patient.id, :user_id => session[:user_id])
- #      render :inline => '<input type="hidden" id="return_patient_id" value="' + @patient.id.to_s + '" />'
- #    else
- #      flash.now.alert = 'Create patient failed, please try again.'
- #      render 'new'
- #    end
+  	if @prescription.save
+      render :inline => '<input type="hidden" id="return-status" value="success" />'
+    else
+      flash.now.alert = 'Destroy patient failed, please try again.'
+      render :nothing => true
+    end
   end
 
   def destroy

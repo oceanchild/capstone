@@ -21,7 +21,7 @@
   <div class="modal-body">
     <span class="span12">
       <label class="form-label span3">Select Pill:</label>   
-      <%= select_tag "prescription[pill_id]", options_from_collection_for_select(@allPills, "id", "name") %>
+      <%= select_tag "prescription[pill_name]", options_from_collection_for_select(@allPills, "id", "name") %>
     </span>
     <span class="span12">
        <label class="form-label span3">Direction:</label>
@@ -42,12 +42,12 @@
       </div>
     </span>
     <span class="span12">
-      <label class="form-label span3">Quantity:</label> 
-      <%= select_tag 'prescription[quantities_per_serving]', '<option value=1>1 pill per serving</option><option value=2>2 pills per serving</option><option value=3>3 pills per serving</option><option value=4>4 pills per serving</option>'.html_safe %>
-    </span>
-    <span class="span12">
       <label class="form-label span3">Frenquency:</label>
       <%= select_tag 'prescription[servings_per_day]', '<option value=1>1 time per day</option><option value=2>2 times per day</option><option value=3>3 times per day</option>'.html_safe %>            
+    </span>
+    <span class="span12">
+      <label class="form-label span3">Quantity:</label> 
+      <%= select_tag 'prescription[quantities_per_serving]', '<option value=1>1 pill per serving</option><option value=2>2 pills per serving</option><option value=3>3 pills per serving</option><option value=4>4 pills per serving</option>'.html_safe %>
     </span>
     <%= hidden_field_tag 'prescription[patient_id]', nil %>
     <%= hidden_field_tag 'prescription[doctor_id]', session[:user_id] %>
