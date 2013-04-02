@@ -17,13 +17,6 @@ class UsersController < ApplicationController
       @note[_myPatient.patient_id] = Note.find_by_sql(["select n.content, n.date_created, u.last_name, u.first_name, n.author_id, u.avatar from notes as n, users as u where n.patient_id = ? and u.id = n.author_id order by n.date_created asc", _myPatient.patient_id])
     end
 
-    #the following code is not efficient, but it works well
-    # @noteAuthor = {}
-    # _allContact = User.all
-    # _allContact.each do |_contact|
-    #   @noteAuthor[_contact.id] = _contact.first_name + " " + _contact.last_name
-    # end
-
     @primaryContact = {}
     _myPatient.each do |_myPatient|
       @primaryContact[_myPatient.patient_id] = User.find_by_sql(["select c.first_name, c.last_name, c.phone, c.address from users as c, associations as j where c.id=j.user_id and j.patient_id=? and c.usertype='Guardian'", _myPatient.patient_id])
@@ -39,9 +32,12 @@ class UsersController < ApplicationController
     # @heartRate = HeartRate.find_by_sql(["select h.pulse, time(m.last_updated) as last_updated from heart_rates as h, monitored_status as m, associations as a where h.monitored_status_id = m.id and m.patient_id = a.patient_id and a.user_id", _current_id.to_i]).collect{|x| [x.pulse, x.last_updated]}
     @heartRate = HeartRate.find_by_sql(["select m.patient_id, floor(avg(h.pulse)) as pulse, time(m.last_updated) as last_updated from heart_rates as h, monitored_status as m, associations as a where h.monitored_status_id = m.id and m.patient_id = a.patient_id and a.user_id = ? group by patient_id", _current_id.to_i])
 
-    #doctor for each patient
-    #if patient id cannot be found in doctorForPatient, then there is no doctor assigned to this patient
-    @doctorForPatient = User.find_by_sql(["select temp.patient_id, a.user_id, u.first_name, u.last_name,u.usertype from (select a.user_id, a.patient_id from users as u, associations as a where u.id = ? and u.id=a.user_id) as temp, associations as a, users as u where a.patient_id = temp.patient_id and u.id=a.user_id and u.usertype<>'Guardian' and u.usertype= 'Doctor' order by temp.patient_id", _current_id.to_i])
+    #doctors for each patient
+    @doctorForPatient={}
+    _myPatient.each do |_myPatient|
+      @doctorForPatient[_myPatient.patient_id] = User.find_by_sql(["select u.first_name, u.last_name from associations as a, users as u where patient_id = ? and a.user_id = u.id and u.usertype = 'Doctor'", _myPatient.patient_id])
+    end
+
   end
 
   def new

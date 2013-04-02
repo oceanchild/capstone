@@ -420,6 +420,15 @@
             'end_date': '<%= _prescription.end_date %>'
           },
           <% end %>
+        ],
+
+        'signedDoctors': [
+          <% @doctorForPatient[_patient.id].each do |_doctor| %>
+          {
+            'first_name': '<%= _doctor.first_name%>',
+            'last_name': '<%= _doctor.last_name%>'
+          },
+          <% end %>
         ]
 
       },
@@ -437,17 +446,7 @@
       <% end %>
     ]
   };
-  var doctorForPatients = {
-    'data': [
-      <% @doctorForPatient.each do |_doctorForPatient| %>
-      {
-        'id': '<%= _doctorForPatient.patient_id %>',
-        'first_name': '<%= _doctorForPatient.first_name%>',
-        'last_name': '<%= _doctorForPatient.last_name%>'
-      },
-      <% end %>
-    ]
-  };
+  
 
   // patient tab switches click action
   var CURRENT_USER_ID = <%= session[:user_id] %>;
@@ -463,17 +462,35 @@
       refreshHeartRate(CURRENT_PATIENT_INDEX);
       refreshDoctor(CURRENT_PATIENT_INDEX);
       refreshPrescription(CURRENT_PATIENT_INDEX);
+      refreshPatientInfo(CURRENT_PATIENT_INDEX);
     });
   });
   function refreshDoctor(i) {
-    var thePatient = patients.data[i].id;
-    // alert(doctorForPatients.data.length);
-    for(var i=0; i<10; i++) {
+    $('#doctor-list').empty();
+    var doctorsDom = '';
 
+    if(patients.data[i].signedDoctors[0] == undefined){
+      //do nothing since there is no prescription for this patient
+    }else{
+      var doctorsDom = '';
+      // console.log(i);
+      for (var j=0; j<patients.data[i].signedDoctors.length;j++){
+        doctorsDom += '<dd class="clearfix">&nbsp;&nbsp;';
+        doctorsDom += patients.data[i].signedDoctors[j].first_name + '&nbsp;' + patients.data[i].signedDoctors[j].last_name;
+        doctorsDom += '</dd>';
+      }
     }
-    document.getElementById("doctor_name_1").innerHTML = "";
+    $('#doctor-list').append(doctorsDom);
   }
-  function refreshHeartRate(i) {
+  function refreshPatientInfo(i) {
+    //refresh health status
+    $('#patient-health-status').empty();
+    $('#patient-health-status').append(patients.data[i].health_status);
+    //refresh patient name display
+    $('#patient-name-display').empty();
+    $('#patient-name-display').append(patients.data[i].first_name + '&nbsp;' + patients.data[i].last_name)
+  }
+  function refreshHeartRate(i) { 
     if (heartRates.data[i] == undefined ) {
       document.getElementById("heartRate_date").innerHTML = "&nbsp;&nbsp;"+"N/A";
       document.getElementById("heartRate").innerHTML = "N/A";
@@ -483,7 +500,7 @@
     }
   }
   function refreshNote(i) {
-    $('#note_patient_id').val(patients.data[i].id);
+    $('#note_patient_id').val(patients.data[i].id);//push value into the hidden field tag
 
     var patientData = patients.data[i];
     var patientNotesListDom = $('#patient-notes');
