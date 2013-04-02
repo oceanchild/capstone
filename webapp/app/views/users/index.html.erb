@@ -223,13 +223,7 @@
   </div><!--/span-->
   <div class="span9">
     <%= render 'shared/display_patient_info_box' %>
-    <% if session[:user_type].to_s == "Doctor" %>
-      <%= render 'shared/display_doctor_patient_administration_box' %>
-    <% elsif session[:user_type].to_s == "Guardian" %>
-      <%= render 'shared/display_guardian_patient_administration_box' %>
-    <% else %>
-      <%= render 'shared/display_caretaker_patient_administration_box' %>
-    <% end %>
+    <%= render 'shared/display_patient_administration_box' %>
   </div><!--/span-->
 </div><!--/row-->
 
@@ -504,22 +498,21 @@
     // console.log(patients.data[1].prescriptions[0].name);
     $('#prescription-list').empty();
 
-    if(patients.data[i].prescriptions[0] == undefined){
-      //do nothing since there is no prescription for this patient
-    }else{
-      var prescriptionDom = '';
-      // console.log(i);
+    if(patients.data[i].prescriptions.length>0) {
+      var prescriptionDom = '<li class="active"><a class="clearfix">';
       for (var j=0; j<patients.data[i].prescriptions.length;j++){
+        prescriptionDom += '<div class="conversation">';
         prescriptionDom += '<div class="well well-small no-tail clearfix">';
         prescriptionDom += '<div class="span1"><img class="img-rounded" src="/assets/pill1.jpg" alt=""></div><div class="span11">';
         prescriptionDom += '<dt>' + patients.data[i].prescriptions[j].name + ' : Doctor ' + patients.data[i].prescriptions[j].first_name + '&nbsp;' + patients.data[i].prescriptions[j].last_name;
         prescriptionDom += '<dd>Start from <b>' + patients.data[i].prescriptions[j].start_date + '</b> to <b>' + patients.data[i].prescriptions[j].end_date + '</b></dd>';
         prescriptionDom += '<dd>' + patients.data[i].prescriptions[j].direction + '</dd>';
         prescriptionDom += '<dd>Instruction: ' + patients.data[i].prescriptions[j].servings_per_day + ' time(s) per day,' + patients.data[i].prescriptions[j].quantities_per_serving + ' pill(s) per serving </dd>';
-        prescriptionDom += '</div></div>';
+        prescriptionDom += '</div></div></div>';
       }
+      prescriptionDom += '</a></li>';
     }
-    $('#prescription-list').append(prescriptionDom);
+    $('#patient-prescriptions').append(prescriptionDom);
 
   }
   function refreshPatient(i) {

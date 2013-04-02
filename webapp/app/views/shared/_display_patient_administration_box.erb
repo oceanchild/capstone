@@ -20,23 +20,15 @@
       <ul class="nav nav-tabs nav-stacked no-tail slider-tab" id="patient-notes"></ul>
     </div>
     <div class="tab-pane fade in" id="tab2">
+      <% if session[:user_type]=='Doctor' %>
       <!-- Button to trigger add prescription modal -->
       <a href="#add-prescription" id="add-prescription-btn" class="btn btn-primary force-tail">Add Prescription Note</a>
       <!-- Add prescription modal -->
       <div id="add-prescription-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addPrescription" aria-hidden="true">
         <%= render 'shared/add_prescription_modal_form' %>
       </div><!--/modal -->
-      <ul class="nav nav-tabs nav-stacked no-tail slider-tab">
-        <li class="active">
-          <a class="clearfix">
-            <span class="pull-left"><b>Current Prescription</b></span>
-            <span class="pull-right"></span>
-            <br>
-            <div id="prescription-list">
-            </div>
-          </a>
-        </li>
-      </ul>
+      <% end %>
+      <ul class="nav nav-tabs nav-stacked no-tail slider-tab" id="patient-prescriptions"></ul>
     </div>
     <div class="tab-pane fade in" id="tab3">
       <div class="well well-small no-tail bg-eee clearfix">
