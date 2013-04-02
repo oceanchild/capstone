@@ -496,7 +496,7 @@
     $('#prescription_patient_id').val(patients.data[i].id);
 
     // console.log(patients.data[1].prescriptions[0].name);
-    $('#prescription-list').empty();
+    $('#patient-prescriptions').empty();
 
     if(patients.data[i].prescriptions.length>0) {
       var prescriptionDom = '<li class="active"><a class="clearfix">';
