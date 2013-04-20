@@ -33,7 +33,7 @@
           data: JSON.stringify(patient_data),
           dataType: 'json'
         }).done(function(data) {
-          $('#response').append(JSON.stringify(data) + '<br />');
+          $('#response').append(JSON.stringify(data, null, 2) + '<br />');
         });
         e.preventDefault();
       });
@@ -42,6 +42,6 @@
 </head>
 <body>
   <a href="#" id="submit">send sample json to webservice push() method</a>
-  <div id="response"></div>
+  <pre id="response"></pre>
 </body>
 </html>

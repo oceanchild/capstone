@@ -81,12 +81,12 @@ def pull(patient_id):
 	today = str(datetime.date(2013, 3, 28))
 	json_obj = {'data': []}
 	json_str = ''
-	query = ('SELECT id, pill_id, servings_per_day, quantities_per_serving, start_date, end_date FROM prescriptions WHERE patient_id = %s AND end_date >= "%s"' % (patient_id, today))
+	query = ('SELECT id, pill_name, servings_per_day, quantities_per_serving, start_date, end_date FROM prescriptions WHERE patient_id = %s AND end_date >= "%s"' % (patient_id, today))
 	try:
 		cur.execute(query)
 		prescriptions = cur.fetchall()
 		for p in prescriptions:
-			row = {'prescription_id': p[0], 'pill_id': p[1], 'servings_per_day': p[2], 'quantities_per_serving': p[3], 'start_date': str(p[4]), 'end_date': str(p[5])}
+			row = {'prescription_id': p[0], 'pill_name': p[1], 'servings_per_day': p[2], 'quantities_per_serving': p[3], 'start_date': str(p[4]), 'end_date': str(p[5])}
 			json_obj['data'].append(row)
 		json_str = json.dumps(json_obj)
 	except:
