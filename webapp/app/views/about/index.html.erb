@@ -31,8 +31,8 @@
       background: url("/assets/greystrips.png") repeat-x;
     }
 
-    .form-login {
-      max-width: 300px;
+    .info_about {
+      max-width: 60%;
       padding: 19px 29px 29px;
       margin: 0 auto 20px;
       background-color: #fff;
@@ -44,12 +44,12 @@
       -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
       box-shadow: 0 1px 2px rgba(0,0,0,.05);
     }
-    .form-login .form-login-heading,
-    .form-login .checkbox {
+    .info_about .info_about-heading,
+    .info_about .checkbox {
       margin-bottom: 10px;
     }
-    .form-login input[type="text"],
-    .form-login input[type="password"] {
+    .info_about input[type="text"],
+    .info_about input[type="password"] {
       font-size: 16px;
       height: auto;
       margin-bottom: 15px;
@@ -62,6 +62,10 @@
     }
     .force-head {
       margin-top: 15px;
+    }
+
+    pre b {
+      c
     }
   </style>
   <link href="/assets/bootstrap-responsive.css" rel="stylesheet">
@@ -93,8 +97,8 @@
       <a class="brand visible-phone" href="/home">HMS V1.0</a>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
+          <li><a href="/">Home</a></li>
+          <li class="active"><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
       </div><!--/.nav-collapse -->
@@ -102,25 +106,21 @@
   </div>
 </div>
 
-<div class="container login">
-  <%= form_tag sessions_path, :class => 'form-login' do %>
-    <h2 class="form-login-heading">Please sign in</h2>
-    <% if @error_msg!=nil %>
-    <div class="error_messages">
-      <ul>
-        <li class="text-error"><%= @error_msg %></li>
-      </ul>
-    </div>
-    <% end %>
-    <%= text_field_tag :email, params[:email], :class => 'input-block-level', :placeholder => 'Email address', :required => true, :tabindex => '1' %>
-    <%= password_field_tag :password, nil, :class => 'input-block-level', :placeholder => 'Password', :required => true, :tabindex => '1' %>
-    <label class="checkbox">
-      <input type="checkbox" value="remember-me" tabindex="1"> Remember me
-    </label>
-    <%= submit_tag 'Sign in »', :class => 'btn btn-large btn-primary', :tabindex => '1' %>
-    <a href="/register" class="btn btn-large pull-right hidden-phone" tabindex="1">Go to register »</a>
-    <a href="/register" class="btn btn-large force-head visible-phone" tabindex="1">Go to register »</a>
-  <% end %>
+<div class="container">
+  <div class="info_about">
+    <pre>
+<strong>Project 1 – Home Monitoring & Response System for Older/Ill People</strong>
+Our society is struggling to care for its aging population so that people can live at home for as long as possible, safely and with dignity. This project is to design and build prototype systems that facilitate this. Groups can define their own goals within this context. There are a few global 
+  requirements:
+• The prototype(s) must include example sensors (cheaper, less accurate sensors are okay as long as the functionality of the system can be demonstrated, and the documentation includes recommendations for improved sensors, and why they are necessary
+• The occupants must not be able to harm themselves or others in the monitored space by setting parameters that will lead to accidents or will effectively disarm the system
+• The prototype(s) must include the monitoring/response side of the system
+• Care must be taken to make the systems robust in the face of hardware malfunction, malicious intrusion, environmental effects, and also with respect to future changes in the system
+• The project can target long-term care facility use rather than, or as well as, in-home use
+• The system must be easy for administrators to use and it must also be as non-intrusive for the clients as possible
+• There may be levels of client interaction dependent on the target facility/clients
+    </pre>
+  </div>
   <hr>
   <div id="footer">
     <div class="container">

@@ -11,6 +11,10 @@ Webapp::Application.routes.draw do
 
   get 'users/user_patient_selection'
 
+  get 'about' => 'about#index', :as => 'about'
+
+  get 'contact' => 'contact#index', :as => 'contact'
+
   post 'users/edit_profile' => 'users#update'
 
   root :to => "sessions#index"

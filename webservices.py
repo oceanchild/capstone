@@ -101,4 +101,4 @@ def pull(patient_id):
 
 if __name__ == '__main__':
 	bottle.debug(True)
-	bottle.run(app, host='localhost', port=8080, reloader=True)
+	bottle.run(app, host='0.0.0.0', port=8000, reloader=True)
